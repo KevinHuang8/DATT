@@ -36,6 +36,7 @@ Change directory and rc file as needed (e.g. if using zsh).
 
 ## Usage
 
+This repo contains the simulation code for training DATT. For running on the real Crazyflie, see our drone stack here: https://github.com/Rwik2000/crazyswarm_DATT
 
 ### Summary:
 
