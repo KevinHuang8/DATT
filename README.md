@@ -46,7 +46,7 @@ To evaluate the policy, run:
 
 `python eval_policy.py -n policy -c DATT_config.py -t trajectory_fbff --ref random_zigzag -s 500 --viz True`
 
-More detailed instructions to come.
+More detailed instructions to come. Crazyswarm code pending.
 
 ### Setting up a task / configuration
 
