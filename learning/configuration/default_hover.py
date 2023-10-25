@@ -1,6 +1,6 @@
 import numpy as np
 
-from quadsim.learning.configuration.configuration import *
+from DATT.learning.configuration.configuration import *
 
 drone_config = DroneConfiguration(
     mass = ConfigValue[float](1.0, False),

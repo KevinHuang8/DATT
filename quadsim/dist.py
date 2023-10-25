@@ -1,6 +1,6 @@
 import numpy as np
 
-from python_utils.wind import WindModel
+from DATT.python_utils.wind import WindModel
 
 class ForceDisturbance:
   def apply(self, model):

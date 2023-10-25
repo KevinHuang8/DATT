@@ -1,5 +1,5 @@
 import numpy as np
-from quadsim.flatref import StaticRef
+from DATT.quadsim.flatref import StaticRef
 
 class SquareRef:
     def __init__(self, altitude, D1, D2, T1, T2):

@@ -9,7 +9,7 @@ class ClosedPoly:
         if random:
             self.sides = np.random.randint(3, 7)
             self.speed = np.random.uniform(0.9, 1.6)
-            print(self.sides, self.speed)
+            # print(self.sides, self.speed)
         else:
             self.sides = sides
         self.fixed_seed = fixed_seed

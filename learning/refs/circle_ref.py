@@ -1,5 +1,5 @@
 import numpy as np
-from quadsim.flatref import StaticRef
+from DATT.quadsim.flatref import StaticRef
 
 class CircleRef:
     def __init__(self, rad, altitude, offset=(1,0), period=2*np.pi):

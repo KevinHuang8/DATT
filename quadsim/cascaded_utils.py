@@ -1,6 +1,6 @@
 import numpy as np
 
-from python_utils.mathu import e3
+from DATT.python_utils.mathu import e3
 
 def thrust_project_z(accel_des, rot):
   z_b = rot.apply(e3)

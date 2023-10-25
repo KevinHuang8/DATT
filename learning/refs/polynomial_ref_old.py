@@ -1,5 +1,5 @@
 import numpy as np
-from quadsim.flatref import StaticRef
+from DATT.quadsim.flatref import StaticRef
 
 class PolynomialRef:
     def __init__(self, A, B, C, period, scale=1.25, altitude=0.75):

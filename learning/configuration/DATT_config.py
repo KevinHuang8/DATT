@@ -1,6 +1,6 @@
 import numpy as np
 
-from quadsim.learning.configuration.configuration import *
+from DATT.learning.configuration.configuration import *
 
 drone_config = DroneConfiguration(
     mass = ConfigValue[float](1.0, randomize=False),
@@ -16,7 +16,7 @@ wind_config = WindConfiguration(
         min=np.array([-2, -2, -2]),
         max=np.array([2, 2, 2])
     ),
-    random_walk=ConfigValue[bool](True)
+    random_walk=True
 )
 
 init_config = InitializationConfiguration(
@@ -59,7 +59,7 @@ train_config = TrainingConfiguration()
 policy_config = PolicyConfiguration()
 
 ref_config = RefConfiguration(
-    init_ref = ConfigValue[int](1)
+    init_ref = 1
 )
 
 config = AllConfig(drone_config, wind_config, init_config, sim_config, adapt_config, train_config, policy_config, ref_config)

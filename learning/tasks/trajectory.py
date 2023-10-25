@@ -2,13 +2,13 @@ import numpy as np
 
 from gym import Env, spaces
 
-from quadsim.sim import QuadSim
-from quadsim.models import IdentityModel
-from quadsim.rigid_body import State
-from quadsim.learning.base_env import BaseQuadsimEnv
-from quadsim.learning.configuration.configuration import AllConfig
-from quadsim.circleref import CircleRef
-from quadsim.lineref import LineRef
+from DATT.quadsim.sim import QuadSim
+from DATT.quadsim.models import IdentityModel
+from DATT.quadsim.rigid_body import State
+from DATT.learning.base_env import BaseQuadsimEnv
+from DATT.learning.configuration.configuration import AllConfig
+from DATT.quadsim.circleref import CircleRef
+from DATT.quadsim.lineref import LineRef
 from scipy.spatial.transform import Rotation as R
 
 

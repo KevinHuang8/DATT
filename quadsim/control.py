@@ -1,6 +1,6 @@
 import numpy as np
 
-from quadsim.learn import AccelLearner
+from DATT.quadsim.learn import AccelLearner
 
 class Controller:
   def __init__(self, output_rpm=False):

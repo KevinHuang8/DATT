@@ -1,6 +1,6 @@
 import numpy as np
 
-from python_utils.quadrotoru import Quadrotor
+from DATT.python_utils.quadrotoru import Quadrotor
 
 class RBModel:
   def __init__(self, mass, I, g):

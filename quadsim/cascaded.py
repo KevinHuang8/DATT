@@ -2,13 +2,13 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
-from python_utils.mathu import e3
+from DATT.python_utils.mathu import e3
 
-from quadsim.cascaded_utils import thrust_project_z
-from quadsim.control import Controller, ControllerLearnAccel, torque_from_aa
-from quadsim.flatness import att_hod_from_flat, get_xdot_xddot
+from DATT.quadsim.cascaded_utils import thrust_project_z
+from DATT.quadsim.control import Controller, ControllerLearnAccel, torque_from_aa
+from DATT.quadsim.flatness import att_hod_from_flat, get_xdot_xddot
 
 class CascadedController(Controller):
   def __init__(self, model, rot_metric=rot_metrics.euler_zyx, u_f=thrust_project_z, add_angvel_linearizing_term=False):

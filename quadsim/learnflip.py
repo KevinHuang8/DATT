@@ -6,18 +6,18 @@ import numpy as np
 
 from pathlib import Path
 
-from quadsim.sim import QuadSim
-from quadsim.cascaded import CascadedController
-from quadsim.cascaded_angvel import CascadedControllerAngvel
-from quadsim.fblin import FBLinController
-from quadsim.flatref import StaticRef, PosLine
-from quadsim.models import IdentityModel
-from quadsim.rigid_body import State
-from quadsim.visualizer import Vis
+from DATT.quadsim.sim import QuadSim
+from DATT.quadsim.cascaded import CascadedController
+from DATT.quadsim.cascaded_angvel import CascadedControllerAngvel
+from DATT.quadsim.fblin import FBLinController
+from DATT.quadsim.flatref import StaticRef, PosLine
+from DATT.quadsim.models import IdentityModel
+from DATT.quadsim.rigid_body import State
+from DATT.quadsim.visualizer import Vis
 
-from python_utils.plotu import subplot, set_3daxes_equal
+from DATT.python_utils.plotu import subplot, set_3daxes_equal
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
 from gym import Env, spaces
 

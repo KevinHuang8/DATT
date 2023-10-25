@@ -2,9 +2,9 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from python_utils.mathu import e1, e2, e3, normalized
+from DATT.python_utils.mathu import e1, e2, e3, normalized
 
-from quadsim.models import general_params
+from DATT.quadsim.models import general_params
 
 g = -e3 * general_params()['g']
 

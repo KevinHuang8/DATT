@@ -7,14 +7,14 @@ from pathlib import Path
 from scipy.spatial.transform import Rotation as R
 from gym import Env, spaces
 
-from quadsim.sim import QuadSim
-from quadsim.models import IdentityModel, RBModel
-from quadsim.rigid_body import State
-from quadsim.dist import WindField, ConstantForce
-from quadsim.learning.configuration.configuration import AllConfig
-from quadsim.learning.configuration.configuration import EnvCondition
+from DATT.quadsim.sim import QuadSim
+from DATT.quadsim.models import IdentityModel, RBModel
+from DATT.quadsim.rigid_body import State
+from DATT.quadsim.dist import WindField, ConstantForce
+from DATT.learning.configuration.configuration import AllConfig
+from DATT.learning.configuration.configuration import EnvCondition
 
-from quadsim.learning.classical_adaptation import Adapation
+from DATT.learning.classical_adaptation import Adapation
 
 @dataclass
 class ObsData:

@@ -2,7 +2,7 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from quadsim.control import Controller
+from DATT.quadsim.control import Controller
 
 class PIDController(Controller):
   def __init__(self, model):

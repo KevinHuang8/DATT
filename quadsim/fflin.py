@@ -2,12 +2,12 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
-from python_utils.mathu import normang, e1, e2, e3
+from DATT.python_utils.mathu import normang, e1, e2, e3
 
-from quadsim.control import Controller, ControllerLearnAccel, torque_from_aa
-from quadsim.flatness import (
+from DATT.quadsim.control import Controller, ControllerLearnAccel, torque_from_aa
+from DATT.quadsim.flatness import (
   u1_from_a,
   a_from_z,
   j_from_zdot,

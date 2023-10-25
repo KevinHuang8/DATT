@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 from os.path import exists
 from argparse import ArgumentParser
 
-from quadsim.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
-from quadsim.visualizer import Vis
-from python_utils.plotu import subplot
+from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+from DATT.quadsim.visualizer import Vis
+from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R
-from quadsim.learning.configuration.configuration import AllConfig
-from quadsim.learning.utils.adaptation_network import AdaptationNetwork
-from quadsim.learning.base_env import BaseQuadsimEnv
-from quadsim.learning.train_policy import TrajectoryRef
+from DATT.learning.configuration.configuration import AllConfig
+from DATT.learning.utils.adaptation_network import AdaptationNetwork
+from DATT.learning.base_env import BaseQuadsimEnv
+from DATT.learning.train_policy import TrajectoryRef
 
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.evaluation import evaluate_policy

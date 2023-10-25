@@ -2,13 +2,13 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
-from python_utils.mathu import e1, e2, e3
+from DATT.python_utils.mathu import e1, e2, e3
 
-from quadsim.cascaded_utils import thrust_project_z
-from quadsim.control import Controller
-from quadsim.flatness import angvel_hod_from_flat
+from DATT.quadsim.cascaded_utils import thrust_project_z
+from DATT.quadsim.control import Controller
+from DATT.quadsim.flatness import angvel_hod_from_flat
 
 class CascadedControllerAngvel(Controller):
   """ Outputs angular velocity as the control instead of torque """

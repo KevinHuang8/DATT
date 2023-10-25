@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 
 from functools import partial
 
-from python_utils.mathu import vee, e1, e3, skew_matrix, normang
-from python_utils.plotu import named
+from DATT.python_utils.mathu import vee, e1, e3, skew_matrix, normang
+from DATT.python_utils.plotu import named
 
 from scipy.spatial.transform import Rotation as R
 

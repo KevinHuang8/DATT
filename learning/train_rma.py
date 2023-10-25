@@ -5,14 +5,14 @@ import torch.nn.functional as F
 
 from os.path import exists
 from argparse import ArgumentParser
-from quadsim.learning.train_policy import TrajectoryRef
+from DATT.learning.train_policy import TrajectoryRef
 from tqdm.rich import tqdm, Progress, RateColumn
 from rich.progress import MofNCompleteColumn, TimeElapsedColumn
 
-from quadsim.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, DEFAULT_LOG_DIR
-from quadsim.learning.configuration.configuration import AllConfig
-from quadsim.learning.utils.adaptation_network import AdaptationNetwork
-from quadsim.learning.base_env import BaseQuadsimEnv
+from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, DEFAULT_LOG_DIR
+from DATT.learning.configuration.configuration import AllConfig
+from DATT.learning.utils.adaptation_network import AdaptationNetwork
+from DATT.learning.base_env import BaseQuadsimEnv
 
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv

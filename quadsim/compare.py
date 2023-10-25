@@ -5,26 +5,26 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from quadsim.cascaded import CascadedController, thrust_project_z, thrust_maintain_z
-from quadsim.dist import MassDisturbance, LinearDrag, InertiaDisturbance, MotorModelDisturbance, WindField
-from quadsim.fblin import (
+from DATT.quadsim.cascaded import CascadedController, thrust_project_z, thrust_maintain_z
+from DATT.quadsim.dist import MassDisturbance, LinearDrag, InertiaDisturbance, MotorModelDisturbance, WindField
+from DATT.quadsim.fblin import (
   FBLinController,
   FBLinControllerThrustDelay,
   FBLinControllerThrustDelayNL,
   FBLinControllerFullDelay
 )
-from quadsim.fflin import (
+from DATT.quadsim.fflin import (
   FFLinController,
 )
-from quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
-from quadsim.models import IdentityModel, rocky09
-from quadsim.rigid_body import State
-from quadsim.sim import QuadSim, QuadSimMotors
+from DATT.quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
+from DATT.quadsim.models import IdentityModel, rocky09
+from DATT.quadsim.rigid_body import State
+from DATT.quadsim.sim import QuadSim, QuadSimMotors
 
-from python_utils.mathu import normang, smoothang
-from python_utils.plotu import subplot, set_3daxes_equal
+from DATT.python_utils.mathu import normang, smoothang
+from DATT.python_utils.plotu import subplot, set_3daxes_equal
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
 import matplotlib.pyplot as plt
 

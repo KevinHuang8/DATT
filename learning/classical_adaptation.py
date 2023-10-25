@@ -41,7 +41,7 @@ class Adapation():
         self.d_hat = (1 - self.lamb) * self.d_hat + self.lamb * adapt_term
         self.v_hat = v_t
 
-        print(self.d_hat)
+        # print(self.d_hat)
     
     def pseudo_adaptation(self, v_t, f_t):
         pass

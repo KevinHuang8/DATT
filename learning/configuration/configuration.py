@@ -116,7 +116,7 @@ class SimConfiguration:
 
 @dataclass
 class TrainingConfiguration:
-    body_frame: ConfigValue[bool] = ConfigValue[bool](default=True, randomize=False)
+    body_frame: bool = True
 
     # Whether each parallel env should have a different seed (only for the ref trajectory)
     env_diff_seed: bool = False

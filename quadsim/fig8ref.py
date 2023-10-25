@@ -1,5 +1,5 @@
 import numpy as np
-from quadsim.flatref import StaticRef
+from DATT.quadsim.flatref import StaticRef
 
 class Fig8Ref:
     def __init__(self, a, altitude, period=2*np.pi):

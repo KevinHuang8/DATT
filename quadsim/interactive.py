@@ -5,15 +5,15 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from python_utils.keygrabber import KeyGrabber
+from DATT.python_utils.keygrabber import KeyGrabber
 
-from quadsim.sim import QuadSim
-from quadsim.cascaded import CascadedController
-from quadsim.learning.policy_controller import PolicyController
-from quadsim.flatref import StaticRef
-from quadsim.models import IdentityModel
+from DATT.quadsim.sim import QuadSim
+from DATT.quadsim.cascaded import CascadedController
+from DATT.learning.policy_controller import PolicyController
+from DATT.quadsim.flatref import StaticRef
+from DATT.quadsim.models import IdentityModel
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
 keymap = dict(
     left='a',

@@ -2,27 +2,27 @@ import sys
 
 import numpy as np
 
-from quadsim.sim import QuadSim
-from quadsim.cascaded import CascadedController
-from quadsim.fblin import FBLinController
-from quadsim.flatref import StaticRef, PosLine
-from quadsim.pid_controller import PIDController
-from quadsim.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
-from quadsim.flatref import StaticRef, PosLine
-from quadsim.models import IdentityModel
-from quadsim.dist import WindField, ConstantForce
-from quadsim.circleref import CircleRef
-from quadsim.lineref import LineRef
-from quadsim.learning.refs.square_ref import SquareRef
-from quadsim.learning.refs.random_zigzag import RandomZigzag
-from quadsim.learning.refs.pointed_star import NPointedStar
-from quadsim.learning.policy_controller import PolicyController
-from quadsim.learning.refs.gen_trajectory import main_loop, Trajectory
-from quadsim.fig8ref import Fig8Ref
+from DATT.quadsim.sim import QuadSim
+from DATT.quadsim.cascaded import CascadedController
+from DATT.quadsim.fblin import FBLinController
+from DATT.quadsim.flatref import StaticRef, PosLine
+from DATT.quadsim.pid_controller import PIDController
+from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
+from DATT.quadsim.flatref import StaticRef, PosLine
+from DATT.quadsim.models import IdentityModel
+from DATT.quadsim.dist import WindField, ConstantForce
+from DATT.quadsim.circleref import CircleRef
+from DATT.quadsim.lineref import LineRef
+from DATT.learning.refs.square_ref import SquareRef
+from DATT.learning.refs.random_zigzag import RandomZigzag
+from DATT.learning.refs.pointed_star import NPointedStar
+from DATT.learning.policy_controller import PolicyController
+from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
+from DATT.quadsim.fig8ref import Fig8Ref
 
-from python_utils.plotu import subplot, set_3daxes_equal
+from DATT.python_utils.plotu import subplot, set_3daxes_equal
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
 import matplotlib.pyplot as plt
 from pathlib import Path

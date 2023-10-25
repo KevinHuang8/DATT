@@ -2,9 +2,9 @@ import numpy as np
 
 from gym import spaces
 
-from quadsim.learning.base_env import BaseQuadsimEnv
-from quadsim.learning.configuration.configuration import AllConfig
-from quadsim.lineref import LineRef
+from DATT.learning.base_env import BaseQuadsimEnv
+from DATT.learning.configuration.configuration import AllConfig
+from DATT.quadsim.lineref import LineRef
 
 from scipy.spatial.transform import Rotation as R
 

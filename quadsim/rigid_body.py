@@ -2,8 +2,8 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from python_utils.mathu import quat_mult, vector_quat, normalized
-from python_utils.rigid_body import euler_int, so3_quat_int
+from DATT.python_utils.mathu import quat_mult, vector_quat, normalized
+from DATT.python_utils.rigid_body import euler_int, so3_quat_int
 
 class State:
   def __init__(self, pos=np.zeros(3), vel=np.zeros(3), rot=R.identity(), ang=np.zeros(3)):

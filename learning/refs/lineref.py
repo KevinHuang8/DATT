@@ -1,5 +1,5 @@
 import numpy as np
-from quadsim.flatref import StaticRef
+from DATT.quadsim.flatref import StaticRef
 
 class LineRef:
     def __init__(self, D, altitude, period=4):

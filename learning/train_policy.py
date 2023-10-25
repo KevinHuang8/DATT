@@ -15,18 +15,18 @@ from stable_baselines3.common.torch_layers import FlattenExtractor
 from stable_baselines3.common.vec_env import VecEnv, VecMonitor
 from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
 
-from quadsim.learning.base_env import BaseQuadsimEnv
-from quadsim.learning.configuration.configuration import AllConfig, RefConfiguration
-from quadsim.learning.tasks import (hover,
+from DATT.learning.base_env import BaseQuadsimEnv
+from DATT.learning.configuration.configuration import AllConfig, RefConfiguration
+from DATT.learning.tasks import (hover,
                                     trajectory_fbff, 
                                     trajectory_fbff_vel,
                                     yawflip, 
                                     trajectory_fbff_yaw
                                     )
-from quadsim.learning.refs import (
+from DATT.learning.refs import (
         lineref, square_ref, circle_ref, random_zigzag, setpoint_ref, polynomial_ref, random_zigzag_yaw,
         chained_poly_ref, mixed_trajectory_ref, gen_trajectory, pointed_star, closed_polygon)
-from quadsim.learning.utils.feedforward_feature_extractor import \
+from DATT.learning.utils.feedforward_feature_extractor import \
     FeedforwardFeaturesExtractor
 
 class DroneTask(Enum):

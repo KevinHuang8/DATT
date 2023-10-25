@@ -4,17 +4,17 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from quadsim.cascaded import CascadedController, CascadedControllerLearnAccel
-from quadsim.dist import MassDisturbance, LinearDrag, InertiaDisturbance, MotorModelDisturbance, WindField
-from quadsim.fblin import FBLinController, FBLinControllerLearnAccel
-from quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
-from quadsim.learn import InputVel, InputPos, InputPosVel
-from quadsim.models import IdentityModel, rocky09
-from quadsim.rigid_body import State
+from DATT.quadsim.cascaded import CascadedController, CascadedControllerLearnAccel
+from DATT.quadsim.dist import MassDisturbance, LinearDrag, InertiaDisturbance, MotorModelDisturbance, WindField
+from DATT.quadsim.fblin import FBLinController, FBLinControllerLearnAccel
+from DATT.quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
+from DATT.quadsim.learn import InputVel, InputPos, InputPosVel
+from DATT.quadsim.models import IdentityModel, rocky09
+from DATT.quadsim.rigid_body import State
 
-from quadsim.compare import Test, plot, run
+from DATT.quadsim.compare import Test, plot, run
 
-import quadsim.rot_metrics as rot_metrics
+import DATT.quadsim.rot_metrics as rot_metrics
 
 from regression import Linear, SSGPR
 

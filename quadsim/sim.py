@@ -4,12 +4,12 @@ import numpy as np
 
 from scipy.spatial.transform import Rotation as R
 
-from python_utils.timeseriesu import TimeSeries
-from python_utils.mathu import e3
+from DATT.python_utils.timeseriesu import TimeSeries
+from DATT.python_utils.mathu import e3
 
-from quadsim.rigid_body import RigidBody
-from quadsim.visualizer import Vis
-from quadsim.learning.utils.heap import heap
+from DATT.quadsim.rigid_body import RigidBody
+from DATT.quadsim.visualizer import Vis
+from DATT.learning.utils.heap import heap
 
 class QuadSim:
   def __init__(self, model, force_limit=200, torque_limit=100, angvel_limit=40, vis=False):

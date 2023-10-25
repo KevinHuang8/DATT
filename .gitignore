@@ -1,4 +1,5 @@
 __pycache__/
+*/__pycache__/
 *.swp
 learning/data/
 learning/MPC/
@@ -9,3 +10,4 @@ learning/c_generated_code/
 .vs/
 media/
 logging/
+configuration/

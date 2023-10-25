@@ -1,6 +1,6 @@
 import numpy as np
 
-from python_utils.polyu import deriv_fitting_matrix
+from DATT.python_utils.polyu import deriv_fitting_matrix
 
 deriv_names = ['pos', 'vel', 'acc', 'jerk', 'snap']
 yawderiv_names = ['yaw', 'yawvel', 'yawacc']

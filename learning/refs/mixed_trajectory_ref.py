@@ -1,9 +1,9 @@
-from quadsim.learning.refs.chained_poly_ref import ChainedPolyRef
-from quadsim.learning.refs.polynomial_ref import PolyRef
-from quadsim.learning.refs.random_zigzag import RandomZigzag
-from quadsim.learning.refs.setpoint_ref import SetpointRef
-from quadsim.learning.refs.pointed_star import NPointedStar
-from quadsim.learning.refs.closed_polygon import ClosedPoly
+from DATT.learning.refs.chained_poly_ref import ChainedPolyRef
+from DATT.learning.refs.polynomial_ref import PolyRef
+from DATT.learning.refs.random_zigzag import RandomZigzag
+from DATT.learning.refs.setpoint_ref import SetpointRef
+from DATT.learning.refs.pointed_star import NPointedStar
+from DATT.learning.refs.closed_polygon import ClosedPoly
 
 import numpy as np
 import random
