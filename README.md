@@ -35,9 +35,8 @@ Change directory and rc file as needed (e.g. if using zsh).
 
 ## Usage
 
-More detailed instructions to come.
 
-## Summary:
+### Summary:
 
 For training the main policy from the DATT paper, from the `learning` folder, run:
 
@@ -47,7 +46,7 @@ To evaluate the policy, run:
 
 `python eval_policy.py -n policy -c DATT_config.py -t trajectory_fbff --ref random_zigzag -s 500 --viz True`
 
-
+More detailed instructions to come.
 
 ### Setting up a task / configuration
 
