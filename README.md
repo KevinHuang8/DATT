@@ -4,6 +4,7 @@
 
 [[Website]](https://sites.google.com/view/deep-adaptive-traj-tracking)
 [[arXiv]](https://arxiv.org/abs/2310.09053)
+[[Firmware Code]](https://github.com/Rwik2000/crazyswarm_DATT)
 
 [![Python Version](https://img.shields.io/badge/Python-3.8-blue.svg)](https://github.com/KevinHuang8/DATT)
 
