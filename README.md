@@ -8,8 +8,6 @@
 [![Python Version](https://img.shields.io/badge/Python-3.8-blue.svg)](https://github.com/KevinHuang8/DATT)
 
 
-More detailed instructions to come.
-
 ![](images/main.png)
 </div>
 
@@ -36,6 +34,8 @@ export PYTHONPATH="${HOME}/python":"${PYTHONPATH}"
 Change directory and rc file as needed (e.g. if using zsh).
 
 ## Usage
+
+More detailed instructions to come.
 
 ## Summary:
 
