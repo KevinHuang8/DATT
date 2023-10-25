@@ -6,6 +6,8 @@ Training a policy requires specifying a *task* and a *configuration*. The task d
 
 See tasks in `./tasks/`. Each class is superclass of `BaseEnv`, which has the gym env API. In practice, the primary thing that should change between different drone tasks are the action space and reward function.
 
+Standard trajectory tracking should have `trajectory_fbff` passed in.
+
 NOTE: When adding a new task, you must modify the `DroneTask` enum in `train_policy.py` to add the new task along with its corresponding environment, for it to get recognized. 
 
 ### Configuration
@@ -14,7 +16,7 @@ NOTE: When adding a new task, you must modify the `DroneTask` enum in `train_pol
 
 **NOTE: `configuration.py` should not be modified (it just defines the configurable parameters). To create a configuration, a new file needs to be created.**
 
-Each configurable parameter needs to be set to a `ConfigValue` (see `configuration.py`). Each `ConfigValue` takes in the default value of the parameter, and whether or not that parameter should be randomized during training. If a param should be randomized, you need to also specify the min and max possible range of randomization for that parameter.
+Configurable parameters that can be randomly sampled during training can be set to a `ConfigValue` (see `configuration.py`). Each `ConfigValue` takes in the default value of the parameter, and whether or not that parameter should be randomized during training. If a param should be randomized, you need to also specify the min and max possible range of randomization for that parameter.
 
 Each parameter is part of some parameter group, which shares a `Sampler`, which specifies how parameters in that group should be randomly sampled if they are specified to be randomized. By default, the sampling function is just uniform sampling, but the sampling function can take in anything, like the reward or timestep, which can be used to specify a learning curriculum, etc. To add more info to the sampling function input, or to change *when* in training a parameter is resampled from the default, however, you must modify the task/environment.
 
@@ -24,7 +26,6 @@ Run `train_policy.py` from the command line. It takes the following arguments:
 
 - `-n` `--name` : the name of the policy. All log/data files will have this name as the prefix. If you pass in a name that already exists (a policy exists if a file with the same name appears in `./saved_policies/`), then you will continue training that policy with new data. If not provided, autogenerates depending on the other parameters.
 - `-t` `--task` : the name of the task; must be defined in the `DroneTask` enum in `train_policy.py`. Essentially, this specifies the environment. Defaults to hovering
-- `-a` `--algo` : The RL algorithm to use to train the policy. Must be defined in the `RLALgo` enum. Must have the stable baselines API. Defaults to PPO.
 - `-c` `--config` : The configuration file (a `.py` file), which must instantiate an `AllConfig` object named `config`. 
 - `-ts` `--timesteps` : The number of timesteps to train for, defaults to 1 million. The model also saves checkpoints every 500,000 steps.
 - `-d` `--log-dir` : The directory to save training logs (tensorboard) to. Defaults to `./logs/{policy_name}_logs`

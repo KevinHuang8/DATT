@@ -1,0 +1,14 @@
+ale_py==0.7.4
+gym==0.21.0
+imageio==2.9.0
+joblib==0.14.1
+matplotlib==3.2.1
+meshcat==0.3.2
+numpy==1.23.4
+Pillow==10.1.0
+pygame==2.4.0
+rich==13.6.0
+scipy==1.11.3
+stable_baselines3==1.6.2
+torch==1.13.0+cu117
+tqdm==4.64.1
