@@ -1,0 +1,11 @@
+__pycache__/
+*.swp
+learning/data/
+learning/MPC/
+learning/logs/*
+learning/saved_policies/
+c_generated_code/
+learning/c_generated_code/
+.vs/
+media/
+logging/
