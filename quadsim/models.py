@@ -6,6 +6,10 @@ class RBModel:
   def __init__(self, mass, I, g):
     self.mass = mass
     self.I = I
+
+    self.a_min = np.array([0, 0, 0, 0])
+    self.a_max = np.array([12, 12, 12, 12]) / 1000 * 9.81
+
     self.g = g
     self.dt = 0.02
     self.k = 1.0

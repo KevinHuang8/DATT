@@ -22,7 +22,7 @@ from DATT.quadsim.fig8ref import Fig8Ref
 
 
 from DATT.quadsim.controllers.pid_controller import PIDController
-# from DATT.quadsim.controllers.mppi_controller import MPPIController
+from DATT.quadsim.controllers.mppi_controller import MPPIController
 
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
@@ -62,11 +62,11 @@ if __name__ == "__main__":
   # controller = CascadedController(model, rot_metric=rot_metrics.euler_zyx)
   #controller = FBLinController(model, dt=dt)
 
-  # cntrl_config = MPPIConfig()
-  # controller = MPPI
+  cntrl_config = MPPIConfig()
+  controller = MPPIController(model, cntrl_config=cntrl_config)
 
-  cntrl_config = PIDConfig()
-  controller = PIDController(model, cntrl_config=cntrl_config)
+  # cntrl_config = PIDConfig()
+  # controller = PIDController(model, cntrl_config=cntrl_config)
   
   controller.ref_func = ref
   dists = [
