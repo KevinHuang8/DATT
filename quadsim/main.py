@@ -6,7 +6,7 @@ from DATT.quadsim.sim import QuadSim
 from DATT.quadsim.cascaded import CascadedController
 from DATT.quadsim.fblin import FBLinController
 from DATT.quadsim.flatref import StaticRef, PosLine
-from DATT.quadsim.pid_controller import PIDController
+# from DATT.quadsim.pid_controller import PIDController
 # from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
 from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.models import IdentityModel
@@ -19,6 +19,11 @@ from DATT.learning.refs.pointed_star import NPointedStar
 # from DATT.learning.policy_controller import PolicyController
 from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
 from DATT.quadsim.fig8ref import Fig8Ref
+
+
+from DATT.quadsim.controllers.pid_controller import PIDController
+# from DATT.quadsim.controllers.mppi_controller import MPPIController
+
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
 from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig
@@ -57,10 +62,13 @@ if __name__ == "__main__":
   # controller = CascadedController(model, rot_metric=rot_metrics.euler_zyx)
   #controller = FBLinController(model, dt=dt)
 
+  # cntrl_config = MPPIConfig()
+  # controller = MPPI
+
   cntrl_config = PIDConfig()
   controller = PIDController(model, cntrl_config=cntrl_config)
-
-  controller.ref = ref
+  
+  controller.ref_func = ref
   dists = [
     # ConstantForce(np.array([4, 4, 4]))
     # WindField(pos=np.array((-1, 1.5, 0.0)), direction=np.array((1, 0, 0)), noisevar=25.0, vmax=1500.0, decay_long=1.8)

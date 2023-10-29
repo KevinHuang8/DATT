@@ -1,8 +1,9 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+from DATT.learning.refs.base_ref import BaseRef
 
-class RandomZigzag:
+class RandomZigzag(BaseRef):
     def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.6, max_dt=1.5, diff_axis=False, seed=2023, env_diff_seed=False, fixed_seed=False):
         self.max_D = max_D
         self.min_dt = min_dt

@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from DATT.learning.refs.base_ref import BaseRef
 
-class RandomZigzagYaw:
+class RandomZigzagYaw(BaseRef):
     def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.9, max_dt=1.5, seed=2023, fixed_seed=False):
         self.max_D = max_D
         self.min_dt = min_dt

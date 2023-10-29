@@ -1,8 +1,9 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+from DATT.learning.refs.base_ref import BaseRef
 
-class NPointedStar:
+class NPointedStar(BaseRef):
     def __init__(self, n_points=5, speed=3, radius=1, random=False, seed=2023, env_diff_seed=False, fixed_seed=False):
         self.n_points = n_points
         self.speed = speed

@@ -1,7 +1,8 @@
 import numpy as np
 from DATT.quadsim.flatref import StaticRef
+from DATT.learning.refs.base_ref import BaseRef
 
-class SquareRef:
+class SquareRef(BaseRef):
     def __init__(self, altitude, D1, D2, T1, T2):
         self.altitude = altitude
         self.D1 = D1

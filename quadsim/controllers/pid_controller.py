@@ -8,8 +8,6 @@ from DATT.quadsim.rigid_body import State_struct
 class PIDController(Controller):
   def __init__(self, model : RBModel, cntrl_config : PIDConfig):
     super().__init__()
-    # self.env_config = env_config
-    # self.drone_config = drone_config
     self.pid_config = cntrl_config
     self.model = model
 
@@ -17,14 +15,13 @@ class PIDController(Controller):
     self.v_prev = np.zeros(3)
     self.prev_t = None
 
-  def _response(self, **response_inputs ):
+  def response(self, **response_inputs ):
     
     t = response_inputs.get('t')
     state : State_struct = response_inputs.get('state')
-    ref_dict : dict = response_inputs.get('ref')
+    # ref_dict : dict = response_inputs.get('ref')
 
-
-    ref_state : State_struct = ref_dict['ref_state']
+    ref_state = self.ref_func.get_state_struct(t)
 
     if self.prev_t != None:
       dt = t - self.prev_t
@@ -61,5 +58,5 @@ class PIDController(Controller):
     self.v_prev = state.vel
     self.prev_t = t
 
-    action = np.r_[acc_des, omega_des]
-    return action
+    # action = np.r_[acc_des, omega_des]
+    return acc_des, omega_des

@@ -1,7 +1,8 @@
 import numpy as np
 from DATT.quadsim.flatref import StaticRef
+from DATT.learning.refs.base_ref import BaseRef
 
-class LineRef:
+class LineRef(BaseRef):
     def __init__(self, D, altitude, period=4):
         self.D = D
         self.altitude = altitude

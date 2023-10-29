@@ -65,8 +65,8 @@ class QuadSim:
       dists = []
 
     state = self.rb.state()
-    bodyz_force, angvel = controller.response(t, state)
-
+    bodyz_force, angvel = controller.response(t=t, state=state)
+    
     controlvars = {}
     if hasattr(controller, 'vars'):
       controlvars.update(controller.vars)

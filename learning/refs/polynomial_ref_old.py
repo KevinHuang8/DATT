@@ -1,7 +1,8 @@
 import numpy as np
 from DATT.quadsim.flatref import StaticRef
+from DATT.learning.refs.base_ref import BaseRef
 
-class PolynomialRef:
+class PolynomialRef(BaseRef):
     def __init__(self, A, B, C, period, scale=1.25, altitude=0.75):
         self.A = A
         self.B = B

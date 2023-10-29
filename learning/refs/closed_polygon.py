@@ -1,8 +1,9 @@
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from DATT.learning.refs.base_ref import BaseRef
 
-class ClosedPoly:
+class ClosedPoly(BaseRef):
     def __init__(self, speed=1, radius=1, sides =3, ang=None, direction=None, equal_division=False, random=False, seed=2023,env_diff_seed=False, fixed_seed=False):
         self.speed = speed
         self.radius = 0.5

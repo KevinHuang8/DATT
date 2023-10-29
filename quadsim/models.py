@@ -7,6 +7,8 @@ class RBModel:
     self.mass = mass
     self.I = I
     self.g = g
+    self.dt = 0.02
+    self.k = 1.0
 
 class IdentityModel(RBModel):
   def __init__(self):

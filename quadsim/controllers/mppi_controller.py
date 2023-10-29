@@ -8,16 +8,20 @@ from quadsim_vision.utils.refs.base_ref import BaseRef
 from quadsim_vision.utils.rigid_body import State_struct
 from quadsim_vision.utils.timer import Timer
 
+from DATT.quadsim.models import RBModel
+
+
 torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
 class MPPIController():
-	def __init__(self, env_config : EnvConfig, drone_config : DroneConfig, cntrl_config : MPPIConfig):
+	def __init__(self, model : RBModel, env_config : EnvConfig, drone_config : DroneConfig, cntrl_config : MPPIConfig):
 		# super().__init__(**kwargs)
+		self.model = model
 		self.mppi_config = cntrl_config
-		self.env_config = env_config
-		self.drone_config = drone_config
+		# self.env_config = env_config
+		# self.drone_config = drone_config
 
-		self.mppi_controller = MPPI_thrust_omega(env_config, drone_config, cntrl_config)
+		self.mppi_controller = MPPI_thrust_omega(model, env_config, drone_config, cntrl_config)
 		self.f_t = np.zeros(3)
 		self.runL1 = True
 
@@ -84,18 +88,17 @@ class MPPI_thrust_omega():
 
 	config -> param.py 
 	'''
-	def __init__(self, env_config : EnvConfig, drone_config : DroneConfig, mppi_config : MPPIConfig):
+	def __init__(self, model : RBModel, mppi_config : MPPIConfig):
 		# self.mppi_config.Name = 'MPPI-thrust_omega'
 		# self.env = env
 
 		self.mppi_config = mppi_config
-		self.env_config = env_config
-		self.drone_config = drone_config
+		self.model = model
 
-		self.thrust_hover = self.drone_config.mass * self.env_config.g
+		self.thrust_hover = self.drone_config.mass * self.model.g
 
 		# MPPI parameters
-		self.t_H = np.arange(0, self.mppi_config.H * self.env_config.dt, self.env_config.dt)
+		self.t_H = np.arange(0, self.mppi_config.H * self.model.dt, self.model.dt)
 
 		self.u      = torch.zeros((self.mppi_config.N, self.mppi_config.H))
 		self.angvel = torch.zeros((self.mppi_config.N, self.mppi_config.H, 3))
@@ -155,7 +158,7 @@ class MPPI_thrust_omega():
 		xdim = startstate.shape[0]
 
 		e3 = torch.tensor((0, 0, 1))
-		dt = self.env_config.dt
+		dt = self.model.dt
 
 		# u = actions[:, :, THRUST] / self.drone_config.mass
 		# angvel = actions[:, :, ANGVEL]
@@ -163,8 +166,8 @@ class MPPI_thrust_omega():
 		# print(actions.size())
 		# exit()
 
-		self.u = self.u + self.env_config.k * (actions[:, :, THRUST] / self.drone_config.mass - self.u)
-		self.angvel = self.angvel + self.env_config.k * (actions[:, :, ANGVEL] - self.angvel)
+		self.u = self.u + self.model.k * (actions[:, :, THRUST] / self.model.mass - self.u)
+		self.angvel = self.angvel + self.model.k * (actions[:, :, ANGVEL] - self.angvel)
 
 		u = self.u
 		angvel = self.angvel
@@ -186,7 +189,7 @@ class MPPI_thrust_omega():
 		self.timer.toc('att kinematics')
 		
 		self.timer.tic()
-		accel = u.unsqueeze(2) * z_from_q(states[:, :, QUAT]) - self.env_config.g * e3.view(1, 1, 3) + L1_adapt[None, None, :]
+		accel = u.unsqueeze(2) * z_from_q(states[:, :, QUAT]) - self.model.g * e3.view(1, 1, 3) + L1_adapt[None, None, :]
 		states[:, :, VEL] = startstate[VEL] + torch.cumsum(accel * dt, dim=1)
 		states[:, :, POS] = startstate[POS] + torch.cumsum(states[:, :, VEL] * dt, dim=1)
 		self.timer.toc('pos dynamics')
@@ -225,7 +228,7 @@ class MPPI_thrust_omega():
 
 		# Use Dynamics Model to turn actions into states
 		self.timer.tic()
-		self.time_step = int(np.ceil(time / self.env_config.dt))
+		self.time_step = int(np.ceil(time / self.model.dt))
 		# states = self.rollout(state, actions)
 		states = self.rollout_with_adaptation(state, actions, L1_adapt)
 		self.timer.toc('rollout')
@@ -242,7 +245,7 @@ class MPPI_thrust_omega():
 		cost = self.mppi_config.alpha_p * torch.sum(torch.linalg.norm(poserr, dim=2), dim=1) + \
 			self.mppi_config.alpha_R * torch.sum(qdistance_torch(states[:, :, QUAT], state_ref[:, :, QUAT]), dim=1)
 
-		cost *= self.env_config.dt
+		cost *= self.model.dt
 		self.timer.toc('reward')
 
 		# compute weight

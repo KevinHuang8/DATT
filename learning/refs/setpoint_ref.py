@@ -1,6 +1,7 @@
 import numpy as np
+from DATT.learning.refs.base_ref import BaseRef
 
-class SetpointRef:
+class SetpointRef(BaseRef):
     def __init__(self, setpoint=(0, 0, 0), randomize=False):
         self.randomize = randomize
         self.default = setpoint
