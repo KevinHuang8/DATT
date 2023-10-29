@@ -4,7 +4,7 @@ from gym import Env, spaces
 
 from DATT.quadsim.sim import QuadSim
 from DATT.quadsim.models import IdentityModel
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 from DATT.learning.base_env import BaseQuadsimEnv
 from DATT.learning.configuration.configuration import AllConfig
 from DATT.quadsim.circleref import CircleRef
@@ -34,7 +34,7 @@ class TrajectoryEnv(BaseQuadsimEnv):
     super().reset(state)
 
     if state is None:
-        state = State(
+        state = State_struct(
             pos=np.zeros(3),
             vel=np.zeros(3),
             rot=R.from_euler('ZYX', np.zeros(3), degrees=True),

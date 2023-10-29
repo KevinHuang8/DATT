@@ -12,7 +12,7 @@ from DATT.quadsim.cascaded_angvel import CascadedControllerAngvel
 from DATT.quadsim.fblin import FBLinController
 from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.models import IdentityModel
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 from DATT.quadsim.visualizer import Vis
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
@@ -42,7 +42,7 @@ class FlipEnv(Env):
   def reset(self, state=None):
     # TODO Add randomization here for motor delays and noise, etc.
     if state is None:
-      state = State(
+      state = State_struct(
                 pos=np.random.uniform(low=-0.5, high=0.5, size=(3,)),
                 vel=np.random.uniform(low=-0.5, high=0.5, size=(3,))
               )
@@ -151,7 +151,7 @@ if __name__ == "__main__":
   print(mean_r, std_r)
 
   evalenv = FlipEnv()
-  evalstate = State(pos=np.array((0.0, 0.0, 0.0)), vel=np.array((-0.0, 0, 0.)),)
+  evalstate = State_struct(pos=np.array((0.0, 0.0, 0.0)), vel=np.array((-0.0, 0, 0.)),)
   obs = evalenv.reset(evalstate)
   vis = Vis()
   total_r = 0

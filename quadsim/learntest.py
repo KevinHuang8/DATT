@@ -10,7 +10,7 @@ from DATT.quadsim.fblin import FBLinController, FBLinControllerLearnAccel
 from DATT.quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
 from DATT.quadsim.learn import InputVel, InputPos, InputPosVel
 from DATT.quadsim.models import IdentityModel, rocky09
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 
 from DATT.quadsim.compare import Test, plot, run
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
   endyaw = 0.0
   duration = 2.0
 
-  startstate = State(
+  startstate = State_struct(
     pos=startpos,
     vel=np.zeros(3),
     rot=R.from_euler('ZYX', [startyaw, 0.0, 0.0]),

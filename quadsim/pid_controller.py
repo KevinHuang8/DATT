@@ -1,11 +1,13 @@
 import numpy as np
 
 from scipy.spatial.transform import Rotation as R
-
 from DATT.quadsim.control import Controller
+from DATT.quadsim.models import RBModel
+from DATT.quadsim.controllers.cntrl_config import PIDConfig
+from DATT.quadsim.rigid_body import State_struct
 
 class PIDController(Controller):
-  def __init__(self, model):
+  def __init__(self, model : RBModel, cntrl_config : PIDConfig):
     super().__init__()
     self.model = model
     self.kp_pos = 6
@@ -17,7 +19,7 @@ class PIDController(Controller):
     self.prev_t = None
     self.pos_err_int = np.zeros(3)
 
-  def response(self, t, state):
+  def response(self, t, state : State_struct):
     """
         Given a time t and state state, return body z force and torque (body-frame).
 

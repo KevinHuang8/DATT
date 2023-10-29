@@ -7,7 +7,7 @@ from DATT.quadsim.cascaded import CascadedController
 from DATT.quadsim.fblin import FBLinController
 from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.pid_controller import PIDController
-from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
+# from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
 from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.models import IdentityModel
 from DATT.quadsim.dist import WindField, ConstantForce
@@ -16,13 +16,14 @@ from DATT.quadsim.lineref import LineRef
 from DATT.learning.refs.square_ref import SquareRef
 from DATT.learning.refs.random_zigzag import RandomZigzag
 from DATT.learning.refs.pointed_star import NPointedStar
-from DATT.learning.policy_controller import PolicyController
+# from DATT.learning.policy_controller import PolicyController
 from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
 from DATT.quadsim.fig8ref import Fig8Ref
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
-
+from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig
 import DATT.quadsim.rot_metrics as rot_metrics
+
 
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -55,7 +56,9 @@ if __name__ == "__main__":
   # controller = PolicyController(model, algoname='ppo', policyname=args.policyname)
   # controller = CascadedController(model, rot_metric=rot_metrics.euler_zyx)
   #controller = FBLinController(model, dt=dt)
-  controller = PIDController(model)
+
+  cntrl_config = PIDConfig()
+  controller = PIDController(model, cntrl_config=cntrl_config)
 
   controller.ref = ref
   dists = [
