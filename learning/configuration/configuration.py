@@ -130,7 +130,7 @@ class PolicyConfiguration:
     time_horizon: int = 10
 
     fb_term: bool = True
-
+    ff_term : bool = True
     conv_extractor: bool = True
 
 class EnvCondition(Enum):
@@ -170,8 +170,15 @@ class AdaptationConfiguration:
     include: List[EnvCondition] = field(default_factory=list)
 
     # time horizon of history to pass to adaptation network
-    time_horizon: int = 50    
+    time_horizon: int = 50
 
+    def get_e_dim(self, ):
+        edim = 0
+        for i in len(self.include) : 
+            edim += len(i)
+        
+        return edim
+    
 @dataclass
 class RefConfiguration:
     y_max: int = 1.0

@@ -20,13 +20,17 @@ from DATT.learning.refs.pointed_star import NPointedStar
 from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
 from DATT.quadsim.fig8ref import Fig8Ref
 
+# from DATT.learning.train_policy import DroneTask
+from DATT.learning.configs_enum import *
 
 from DATT.quadsim.controllers.pid_controller import PIDController
 from DATT.quadsim.controllers.mppi_controller import MPPIController
+from DATT.quadsim.controllers.datt_controller import DATTController
+
 
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
-from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig
+from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig, DATTConfig
 import DATT.quadsim.rot_metrics as rot_metrics
 
 
@@ -62,11 +66,18 @@ if __name__ == "__main__":
   # controller = CascadedController(model, rot_metric=rot_metrics.euler_zyx)
   #controller = FBLinController(model, dt=dt)
 
-  cntrl_config = MPPIConfig()
-  controller = MPPIController(model, cntrl_config=cntrl_config)
+  # cntrl_config = MPPIConfig()
+  # controller = MPPIController(model, cntrl_config=cntrl_config)
 
   # cntrl_config = PIDConfig()
   # controller = PIDController(model, cntrl_config=cntrl_config)
+
+  cntrl_config = DATTConfig()
+  cntrl_config.policy_name = 'traj_mixed2D_all_refs_diffaxis2_17500000_steps.zip'
+  cntrl_config.task = DroneTask.TRAJFBFF
+  cntrl_config.config_filename = 'trajectory_latency.py'
+
+  controller = DATTController(model, cntrl_config=cntrl_config)
   
   controller.ref_func = ref
   dists = [

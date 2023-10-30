@@ -21,7 +21,7 @@ adapt_config = AdaptationConfiguration()
 
 train_config = TrainingConfiguration()
 
-policy_config = PolicyConfiguration()
+policy_config = PolicyConfiguration(fb_term=False, ff_term=False)
 
 ref_config = RefConfiguration()
 

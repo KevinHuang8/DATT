@@ -14,7 +14,7 @@ from DATT.quadsim.dist import WindField, ConstantForce
 from DATT.learning.configuration.configuration import AllConfig
 from DATT.learning.configuration.configuration import EnvCondition
 
-from DATT.learning.classical_adaptation import Adapation
+from DATT.learning.adaptation_module import Adapation
 
 @dataclass
 class ObsData:
@@ -73,7 +73,7 @@ class BaseQuadsimEnv(Env):
         self.body_frame = self.config.training_config.body_frame
         self.second_order_delay = self.config.sim_config.second_order_delay
         self.L1_simulation = self.config.sim_config.L1_simulation
-
+        
         self.data_store: List[ObsData] = [] 
 
         # pos (x3), vel (x3), rot (x4, quarternion), ang vel (x3) + env conditions
@@ -181,7 +181,7 @@ class BaseQuadsimEnv(Env):
 
         obs = self.obs(state)
 
-        if self.L1_simulation:
+        if self.L1_simulation.default:
             self.prev_thrust_cmd = 0.0
             self.adaptation_module = Adapation()
             # hack, only valid when d is only env param

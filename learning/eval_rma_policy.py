@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from os.path import exists
 from argparse import ArgumentParser
 
-from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+# from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+from DATT.learning.configs_enum import *
 from DATT.quadsim.visualizer import Vis
 from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R

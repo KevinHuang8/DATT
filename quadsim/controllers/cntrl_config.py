@@ -1,4 +1,9 @@
 import numpy as np
+# from DATT.learning.train_policy import DroneTask
+from DATT.learning.configuration.configuration import *
+# from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+from DATT.learning.configs_enum import *
+
 
 class MPPIConfig:
     lam = 0.05 # temparature
@@ -36,3 +41,42 @@ class PIDConfig:
     kp_rot =   150.0/16
     yaw_gain = 220.0/16
     kp_ang =   16
+
+class DATTConfig:
+    task = DroneTask.HOVER
+    policy_name = "hover_04k"
+    config_filename = "default_hover.py"
+
+    adaptive = False 
+    adaptation_type = None # l1/naive/rma
+    adaptive_policy_name = None # policy name if rma
+
+    config : AllConfig = import_config(config_filename)
+
+    # ff = False
+    # time_horizon = 10
+    # fb = False
+
+
+    # e_dims = 0
+
+    # body_frame = False
+
+
+
+
+    # integration with learning pipeline
+    # drone_config = DroneConfiguration()
+    # wind_config = WindConfiguration()
+    # init_config = InitializationConfiguration()
+    # sim_config = SimConfiguration()
+    # adapt_config = AdaptationConfiguration()
+    # train_config = TrainingConfiguration(body_frame)
+    # policy_config = PolicyConfiguration(fb_term=fb)
+    # ref_config = RefConfiguration()
+    # config = AllConfig(drone_config, wind_config, init_config, sim_config, adapt_config, train_config, policy_config, ref_config)
+
+
+
+    # relative = False
+    # log_scale = False

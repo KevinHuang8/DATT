@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 from os.path import exists
 from argparse import ArgumentParser
 
-from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, TrajectoryRef
+# from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, TrajectoryRef
+from DATT.learning.configs_enum import *
+
 from DATT.quadsim.visualizer import Vis
 
 from DATT.quadsim.models import IdentityModel
@@ -19,7 +21,7 @@ from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.vec_env.base_vec_env import VecEnv
 from DATT.learning.configuration.configuration import AllConfig
 
-from DATT.learning.classical_adaptation import Adapation
+from learning.adaptation_module import Adapation
 
 
 def parse_args():
