@@ -1,4 +1,8 @@
 import numpy as np
+import sys
+import DATT
+sys.modules['quadsim'] = DATT
+
 # from DroneLearning.Controllers.ctrl_backbone import ControllerBackbone
 import time
 from DATT.quadsim.control import Controller
@@ -28,7 +32,6 @@ class DATTController(Controller):
 
     self.algo_class = self.algo.algo_class()
     # config = import_config(self.datt_config.config_filename)
-
     self.env = self.datt_config.task.env()(
           config=self.datt_config.config,
       )
@@ -81,7 +84,7 @@ class DATTController(Controller):
   def response(self, fl = 1, **response_inputs):
     t = response_inputs.get('t')
     state = response_inputs.get('state')
-    ref_func = response_inputs.get('ref_func')
+    # ref_func = response_inputs.get('ref_func')
 
     if self.prev_t is None:
       dt = 0.02
@@ -116,7 +119,7 @@ class DATTController(Controller):
       pos = rot.inv().apply(pos)
       vel = rot.inv().apply(vel)
 
-    obs = np.hstack((pos, vel, quat))
+    obs_ = np.hstack((pos, vel, quat))
     
     # st = time.time()
     # if self.pseudo_adapt== False and fl!=0.0:
@@ -148,14 +151,11 @@ class DATTController(Controller):
     #   self.adaptation_terms[1: ] = pseudo_adapt_term
     #   obs_ = np.hstack((obs, -pseudo_adapt_term))
     # mid = time.time() - st
+    # import pdb;pdb.set_trace()
     if self.datt_config.config.policy_config.ff_term is False:
-        obs_ = obs
-        
-    #     obs_ = np.zeros((self.time_horizon+1) * 3 + 10 + self.e_dims)
-    # else:
-
-    #     if self.relative:
-    #       obs_ = np.hstack([obs_, obs_[0:3] - rot.inv().apply(ref_func(t)[0].pos)] + [obs_[0:3] - rot.inv().apply(ref_func(t + 3 * i * dt)[0].pos) for i in range(self.time_horizon)])
+        pass
+    else:
+      obs_ = np.hstack([obs_, obs_[0:3] - rot.inv().apply(self.ref_func.pos(t))] + [obs_[0:3] - rot.inv().apply(self.ref_func.pos(t + 3 * i * dt)) for i in range(self.datt_config.config.policy_config.time_horizon)])
 
     #     else:
     #       ff_terms = [ref_func(t + 3 * i * dt)[0].pos for i in range(self.time_horizon)]

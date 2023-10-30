@@ -53,6 +53,9 @@ class DATTConfig:
 
     config : AllConfig = import_config(config_filename)
 
+    def load_config(self, ):
+        self.config = import_config(self.config_filename)
+
     # ff = False
     # time_horizon = 10
     # fb = False

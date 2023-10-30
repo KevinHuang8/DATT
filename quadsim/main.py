@@ -76,7 +76,7 @@ if __name__ == "__main__":
   cntrl_config.policy_name = 'traj_mixed2D_all_refs_diffaxis2_17500000_steps.zip'
   cntrl_config.task = DroneTask.TRAJFBFF
   cntrl_config.config_filename = 'trajectory_latency.py'
-
+  cntrl_config.load_config()
   controller = DATTController(model, cntrl_config=cntrl_config)
   
   controller.ref_func = ref
