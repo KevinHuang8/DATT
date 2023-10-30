@@ -174,8 +174,9 @@ class AdaptationConfiguration:
 
     def get_e_dim(self, ):
         edim = 0
-        for i in len(self.include) : 
-            edim += len(i)
+        for i in self.include :
+            if i.value == 'wind':
+                edim += 3
         
         return edim
     

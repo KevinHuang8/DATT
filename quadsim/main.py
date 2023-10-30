@@ -73,10 +73,21 @@ if __name__ == "__main__":
   # controller = PIDController(model, cntrl_config=cntrl_config)
 
   cntrl_config = DATTConfig()
-  cntrl_config.policy_name = 'traj_mixed2D_all_refs_diffaxis2_17500000_steps.zip'
+
+  # cntrl_config.policy_name = 'traj_mixed2D_all_refs_diffaxis2_17500000_steps.zip'
+  # cntrl_config.task = DroneTask.TRAJFBFF
+  # cntrl_config.config_filename = 'trajectory_latency.py'
+  # cntrl_config.load_config()
+
+  cntrl_config.policy_name = 'traj_mixed2D_wind_adaptive2_REAL'
   cntrl_config.task = DroneTask.TRAJFBFF
-  cntrl_config.config_filename = 'trajectory_latency.py'
+  cntrl_config.config_filename = 'trajectory_wind_adaptive.py'
+  cntrl_config.adaptive = True
+  cntrl_config.adaptation_type = 'l1'
+  cntrl_config.adaptive_policy_name = 'wind_adaptation_net_RMA'
   cntrl_config.load_config()
+
+  
   controller = DATTController(model, cntrl_config=cntrl_config)
   
   controller.ref_func = ref

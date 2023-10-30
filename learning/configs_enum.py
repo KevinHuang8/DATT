@@ -3,7 +3,7 @@ import sys
 from enum import Enum
 from pathlib import Path
 import importlib.util
-
+import numpy as np
 
 from stable_baselines3 import A2C, DDPG, PPO, TD3, SAC
 
@@ -88,7 +88,6 @@ class TrajectoryRef(Enum):
         }[TrajectoryRef(self._value_)]
 
 thisdir = os.path.dirname(os.path.realpath(__file__))
-
 DEFAULT_LOG_DIR = Path(thisdir) / 'logs'
 DEFAULT_DATA_DIR = Path(thisdir) / 'data'
 CONFIG_DIR = Path(thisdir) / 'configuration'

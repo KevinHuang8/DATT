@@ -3,6 +3,7 @@ import torch
 import numpy as np
 # from DATT.learning.train_policy import DroneTaskSAVED_POLICY_DIR
 from DATT.learning.configs_enum import *
+from DATT.learning.config_reader import SAVED_POLICY_DIR
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 
 class Adapation():
@@ -43,7 +44,7 @@ class Adapation():
             self.adaptation_network = AdaptationNetwork(input_dims=trainenv.base_dims + action_dims, e_dims=e_dims)
             
             
-        self.adaptation_step = self.rma_adaptation
+            self.adaptation_step = self.rma_adaptation
 
     def reset(self, ):
         self.v_hat = np.zeros(3)
@@ -53,7 +54,7 @@ class Adapation():
     def l1_adaptation(self, v, f):
         unit_mass = 1
         g_vec = np.array([0, 0, -1]) * self.g
-        alpha = 0.98
+        alpha = 0.99
         phi = 1 / self.A * (np.exp(self.A * self.dt) - 1)
 
         a_t_hat = g_vec + f / unit_mass - self.d_hat_t + self.A * (self.v_hat - v)
