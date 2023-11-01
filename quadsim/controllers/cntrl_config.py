@@ -2,8 +2,8 @@ import numpy as np
 # from DATT.learning.train_policy import DroneTask
 from DATT.learning.configuration.configuration import *
 # from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
-from DATT.learning.configs_enum import *
-
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
 
 class MPPIConfig:
     lam = 0.05 # temparature

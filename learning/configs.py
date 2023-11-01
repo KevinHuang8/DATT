@@ -3,7 +3,24 @@ import sys
 from enum import Enum
 from pathlib import Path
 import importlib.util
-import numpy as np
+from stable_baselines3 import A2C, DDPG, PPO, TD3, SAC
+
+
+class RLAlgo(Enum):
+    PPO = 'ppo'
+    A2C = 'a2c'
+    DDPG = 'ddpg'
+    SAC = 'sac'
+    TD3 = 'td3'
+
+    def algo_class(self):
+        return {
+            RLAlgo.PPO: PPO,
+            RLAlgo.A2C: A2C,
+            RLAlgo.DDPG: DDPG,
+            RLAlgo.SAC: SAC,
+            RLAlgo.TD3: TD3,
+        }[RLAlgo(self._value_)]
 
 thisdir = os.path.dirname(os.path.realpath(__file__))
 DEFAULT_LOG_DIR = Path(thisdir) / 'logs'

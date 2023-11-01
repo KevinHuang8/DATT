@@ -2,8 +2,9 @@ import os
 import torch
 import numpy as np
 # from DATT.learning.train_policy import DroneTaskSAVED_POLICY_DIR
-from DATT.learning.configs_enum import *
-from DATT.learning.config_reader import SAVED_POLICY_DIR
+from DATT.learning.configs import *
+# from DATT.learning.tasks import DroneTask
+from DATT.learning.refs import TrajectoryRef
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 
 class Adapation():
@@ -28,7 +29,7 @@ class Adapation():
             policy_name = kwargs.get('policy_name')
             e_dims = kwargs.get('e_dims')
             action_dims = 4
-            trainenv : DroneTask = kwargs.get('trainenv')
+            trainenv = kwargs.get('trainenv') # DroneTask
 
             adapt_name = kwargs.get('adapt_name', None)
 

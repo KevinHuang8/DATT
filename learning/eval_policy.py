@@ -6,7 +6,9 @@ from os.path import exists
 from argparse import ArgumentParser
 
 # from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, TrajectoryRef
-from DATT.learning.configs_enum import *
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
+from DATT.learning.refs import TrajectoryRef
 
 from DATT.quadsim.visualizer import Vis
 

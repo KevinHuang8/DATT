@@ -21,7 +21,10 @@ from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
 from DATT.quadsim.fig8ref import Fig8Ref
 
 # from DATT.learning.train_policy import DroneTask
-from DATT.learning.configs_enum import *
+# from DATT.learning.configs_enum import *
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
+from DATT.learning.refs import TrajectoryRef
 
 from DATT.quadsim.controllers.pid_controller import PIDController
 from DATT.quadsim.controllers.mppi_controller import MPPIController
