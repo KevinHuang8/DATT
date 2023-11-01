@@ -105,6 +105,7 @@ python3 main.py --cntrl <controller name> --cntrl_config <controller config pres
 - `cntrl_config` : Default controller configurations are in `./controllers/cntrl_config.py`. In this field, you make a preset of the default configurations and add them to `./controllers/cntrl_config_presets.py`. You add the preset name from the preset file in this field.
 - `env_config` is the same as config during training
 - `ref` : reference trajectory to be tracked by the controller
+- `seed` : seed of a particular trajectory family you want to use.
 
 ### PID
 ```bash
@@ -127,3 +128,18 @@ We are providing pre-trained models for DATT for different tasks :
 | Hover                                | [datt_hover.py](configuration/datt_hover.py)     |[datt_hover](learning/saved_policies/datt_hover.zip)|
 | Trajectory tracking (No adaptation)  | [datt.py](configuration/datt.py) |       [datt](learning/saved_policies/datt.zip)|
 | Trajectory tracking with adaptation  | [datt_wind_adaptive.py](configuration/datt_wind_adaptive.py)       |[datt_wind_adaptive](learning/saved_policies/datt_wind_adaptive.zip)|
+
+
+
+```bash
+# hover
+python3 main.py --cntrl datt --cntrl_config datt_hover_config --env_config datt_hover.py --ref hover
+# trajectory tracking without adaptation
+python3 main.py --cntrl datt --cntrl_config datt_config --env_config datt.py --ref random_zigzag --seed 2023
+# trajectory tracking with adaptation with L1 adaptation
+python3 main.py --cntrl datt --cntrl_config datt_adaptive_L1_config --env_config datt_wind_adaptive.py --ref random_zigzag --seed 2023
+# trajectory tracking with adaptation with RMA adaptation
+python3 main.py --cntrl datt --cntrl_config datt_adaptive_RMA_config --env_config datt_wind_adaptive.py --ref random_zigzag --seed 2023
+
+
+```

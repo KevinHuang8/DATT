@@ -5,9 +5,10 @@ from enum import Enum
 from DATT.configuration.configuration import AllConfig, RefConfiguration
 from DATT.refs import (
         lineref, square_ref, circle_ref, random_zigzag, setpoint_ref, polynomial_ref, random_zigzag_yaw,
-        chained_poly_ref, mixed_trajectory_ref, gen_trajectory, pointed_star, closed_polygon)
+        chained_poly_ref, mixed_trajectory_ref, gen_trajectory, pointed_star, closed_polygon, base_ref)
 
 class TrajectoryRef(Enum):
+    HOVER = 'hover'
     LINE_REF = 'line_ref'
     SQUARE_REF = 'square_ref'
     CIRCLE_REF = 'circle_ref'
@@ -26,6 +27,7 @@ class TrajectoryRef(Enum):
         if self._value_ == 'gen_traj':
             return gen_trajectory.main_loop(saved_traj=config.ref_name, parent=Path().absolute() / 'refs')
         return {
+            TrajectoryRef.HOVER: base_ref.BaseRef(),
             TrajectoryRef.LINE_REF: lineref.LineRef(D=1.0, altitude=0.0, period=1),
             TrajectoryRef.SQUARE_REF: square_ref.SquareRef(altitude=0, D1=1.0, D2=0.5, T1=1.0, T2=0.5),
             TrajectoryRef.CIRCLE_REF: circle_ref.CircleRef(altitude=0, rad=0.5, period=2.0),

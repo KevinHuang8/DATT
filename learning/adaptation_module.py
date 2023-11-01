@@ -51,7 +51,7 @@ class Adapation():
         
     def l1_adaptation(self, v, f):
         unit_mass = 1
-        g_vec = np.array([0, 0, -1]) * self.g
+        g_vec = np.array([0, 0, -1]) * self.g()
         alpha = 0.99
         phi = 1 / self.A * (np.exp(self.A * self.dt) - 1)
 
@@ -70,7 +70,7 @@ class Adapation():
     def naive_adaptation(self, v_t, f_t):
         unity_mass = 1
         a_t = (v_t - self.v_hat) / self.dt
-        g_vec = np.array([0, 0, -1]) * self.g
+        g_vec = np.array([0, 0, -1]) * self.g()
 
         adapt_term = unity_mass * a_t - unity_mass * g_vec - f_t
 
