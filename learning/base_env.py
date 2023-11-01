@@ -9,12 +9,12 @@ from gym import Env, spaces
 
 from DATT.quadsim.sim import QuadSim
 from DATT.quadsim.models import IdentityModel, RBModel
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 from DATT.quadsim.dist import WindField, ConstantForce
-from DATT.learning.configuration.configuration import AllConfig
-from DATT.learning.configuration.configuration import EnvCondition
+from DATT.configuration.configuration import AllConfig
+from DATT.configuration.configuration import EnvCondition
 
-from DATT.learning.classical_adaptation import Adapation
+from DATT.learning.adaptation_module import Adapation
 
 @dataclass
 class ObsData:
@@ -73,7 +73,7 @@ class BaseQuadsimEnv(Env):
         self.body_frame = self.config.training_config.body_frame
         self.second_order_delay = self.config.sim_config.second_order_delay
         self.L1_simulation = self.config.sim_config.L1_simulation
-
+        
         self.data_store: List[ObsData] = [] 
 
         # pos (x3), vel (x3), rot (x4, quarternion), ang vel (x3) + env conditions
@@ -88,7 +88,7 @@ class BaseQuadsimEnv(Env):
         
         self.reset()
 
-        self.dt = 0.02
+        self.dt = self.config.sim_config.dt()
 
         extra_dims = 0
         all_mins = np.array([])
@@ -129,7 +129,7 @@ class BaseQuadsimEnv(Env):
                 file.write(f'{DATA_EPISODE_SEP}\n')
         self.data_store = []
 
-    def reset(self, state: Optional[State]=None):
+    def reset(self, state: Optional[State_struct]=None):
         """
         Reset the environment (at given initial state if provided). 
         Randomizes environmental conditions if specified by config.
@@ -138,19 +138,20 @@ class BaseQuadsimEnv(Env):
             self.save_info(new_episode=True)
 
         drone_config = self.config.drone_config
+        sim_config = self.config.sim_config
         self.model = RBModel(
             mass=drone_config.sampler.sample_param(drone_config.mass), 
             I=np.eye(3)*drone_config.sampler.sample_param(drone_config.I), 
-            g=drone_config.sampler.sample_param(drone_config.g)
+            g=drone_config.sampler.sample_param(sim_config.g)
         )
-        self.g = drone_config.sampler.sample_param(drone_config.g)
+        self.g = drone_config.sampler.sample_param(sim_config.g)
         self.quadsim = QuadSim(self.model, vis=False)
 
         self.t = 0.0 
 
         if state is None:
             init_config = self.config.init_config
-            state = State(
+            state = State_struct(
                         pos=init_config.sampler.sample_param(init_config.pos),
                         vel=init_config.sampler.sample_param(init_config.vel),
                         rot=R.from_euler('ZYX', init_config.sampler.sample_param(init_config.rot), degrees=True),
@@ -181,20 +182,20 @@ class BaseQuadsimEnv(Env):
 
         obs = self.obs(state)
 
-        if self.L1_simulation:
+        if self.L1_simulation.default:
             self.prev_thrust_cmd = 0.0
             self.adaptation_module = Adapation()
             # hack, only valid when d is only env param
             obs[10:13] = self.adaptation_module.d_hat
         return obs        
 
-    def getstate(self) -> State:
+    def getstate(self) -> State_struct:
         """
         Returns the true state of the drone.
         """
         return self.quadsim.getstate()
     
-    def obs(self, state: State) -> np.ndarray:
+    def obs(self, state: State_struct) -> np.ndarray:
         """
         Returns a noisy observation of the state, augmented with additional
         ground truth environmental conditions, as specified by the adaptation

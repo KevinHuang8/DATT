@@ -1,14 +1,15 @@
-from DATT.learning.refs.chained_poly_ref import ChainedPolyRef
-from DATT.learning.refs.polynomial_ref import PolyRef
-from DATT.learning.refs.random_zigzag import RandomZigzag
-from DATT.learning.refs.setpoint_ref import SetpointRef
-from DATT.learning.refs.pointed_star import NPointedStar
-from DATT.learning.refs.closed_polygon import ClosedPoly
+from DATT.refs.chained_poly_ref import ChainedPolyRef
+from DATT.refs.polynomial_ref import PolyRef
+from DATT.refs.random_zigzag import RandomZigzag
+from DATT.refs.setpoint_ref import SetpointRef
+from DATT.refs.pointed_star import NPointedStar
+from DATT.refs.closed_polygon import ClosedPoly
+from DATT.refs.base_ref import BaseRef
 
 import numpy as np
 import random
 
-class MixedTrajectoryRef:
+class MixedTrajectoryRef(BaseRef):
     def __init__(self, altitude, ymax=0.0, zmax=0.0, diff_axis=False, include_all=False, seed=2023, env_diff_seed=False, init_ref=None, fixed_seed=False):
         self.poly_ref = PolyRef(altitude=altitude, use_y=ymax > 0.0, seed=seed, fixed_seed=fixed_seed)
         # print('DIFF AXIS', diff_axis)

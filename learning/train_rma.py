@@ -9,8 +9,11 @@ from DATT.learning.train_policy import TrajectoryRef
 from tqdm.rich import tqdm, Progress, RateColumn
 from rich.progress import MofNCompleteColumn, TimeElapsedColumn
 
-from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, DEFAULT_LOG_DIR
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
+from DATT.refs import TrajectoryRef
+
+from DATT.configuration.configuration import AllConfig
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 from DATT.learning.base_env import BaseQuadsimEnv
 

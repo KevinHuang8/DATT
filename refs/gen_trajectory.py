@@ -4,6 +4,8 @@ import numpy as np
 import pickle
 import os
 from pathlib import Path
+from DATT.refs.base_ref import BaseRef
+
 RECORD = False
 if RECORD:
     from PIL import Image
@@ -12,7 +14,7 @@ if RECORD:
 
 WIDTH, HEIGHT = 800, 600
 
-class Trajectory:
+class Trajectory(BaseRef):
     def __init__(self, altitude):
         self.altitude = altitude
         self.points = np.empty((0, 3))

@@ -1,42 +1,34 @@
 import numpy as np
-from DATT.quadsim.flatref import StaticRef
+from DATT.refs.base_ref import BaseRef
 
-class LineRef:
-    def __init__(self, D, altitude, period=4):
-        self.D = D
-        self.altitude = altitude
-        self.T = period
+class SetpointRef(BaseRef):
+    def __init__(self, setpoint=(0, 0, 0), randomize=False):
+        self.randomize = randomize
+        self.default = setpoint
+        self.reset()
+
+    def reset(self):
+        if self.randomize:
+            self.setpoint = np.array([
+                np.random.uniform(-1, 1),
+                np.random.uniform(-1, 1),
+                np.random.uniform(-1, 1)
+            ])
+        else:
+            self.setpoint = np.array(self.default)
 
     def pos(self, t):
         if isinstance(t, np.ndarray):
-            x = np.zeros_like(t)
-            forward = (t // self.T) % 2 == 0
-            back = (t // self.T) % 2 == 1
-            x[forward] = self.D / self.T * (t[forward] % self.T)
-            x[back] = self.D - (self.D / self.T * (t[back] % self.T))
-        else:
-            if (t // self.T) % 2 == 0:
-                x = self.D / self.T * (t % self.T)
-            else:
-                x = self.D - (self.D / self.T * (t % self.T))
-        return np.array([
-            x,
-            t*0,
-            t*0 + self.altitude
+            return np.array([
+            t*0 + self.setpoint[0],
+            t*0 + self.setpoint[1],
+            t*0 + self.setpoint[2]
             ])
-
+        return self.setpoint
+    
     def vel(self, t):
-        if isinstance(t, np.ndarray):
-            x = np.zeros_like(t)
-            x[(t // self.T) % 2 == 0] = self.D / self.T
-            x[(t // self.T) % 2 == 1] = -self.D / self.T
-        else:
-            if (t // self.T) % 2 == 0:
-                x = self.D / self.T
-            else:
-                x  = -self.D / self.T
         return np.array([
-            x,
+            t*0,
             t*0,
             t*0
             ])

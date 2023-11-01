@@ -1,13 +1,15 @@
 import numpy as np
 
 from DATT.quadsim.learn import AccelLearner
-
+from DATT.refs.base_ref import BaseRef
 class Controller:
   def __init__(self, output_rpm=False):
     self.output_rpm = output_rpm
     self.vars = {}
 
-    self.sim_angvel = False
+    self.sim_angvel = True
+
+    self.ref_func = BaseRef()
 
   def endtrial(self):
     pass

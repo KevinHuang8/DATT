@@ -5,21 +5,20 @@ import matplotlib.pyplot as plt
 from os.path import exists
 from argparse import ArgumentParser
 
-from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, TrajectoryRef
+# from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR, TrajectoryRef
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
+from DATT.refs import TrajectoryRef
+
 from DATT.quadsim.visualizer import Vis
 
-from DATT.quadsim.models import IdentityModel
-from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R
-from DATT.python_utils.plotu import set_3daxes_equal
 
-from DATT.learning.refs.gen_trajectory import Trajectory
 
-from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.vec_env.base_vec_env import VecEnv
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.configuration.configuration import AllConfig
 
-from DATT.learning.classical_adaptation import Adapation
+from learning.adaptation_module import Adapation
 
 
 def parse_args():

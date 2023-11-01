@@ -7,17 +7,22 @@ import matplotlib.pyplot as plt
 from os.path import exists
 from argparse import ArgumentParser
 
-from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+# from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
+# from DATT.learning.configs_enum import *
+
+from DATT.learning.configs import *
+from DATT.learning.tasks import DroneTask
+from DATT.refs import TrajectoryRef
+
 from DATT.quadsim.visualizer import Vis
 from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.configuration.configuration import AllConfig
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 from DATT.learning.base_env import BaseQuadsimEnv
 from DATT.learning.train_policy import TrajectoryRef
 
 from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.evaluation import evaluate_policy
 
 
 def parse_args():

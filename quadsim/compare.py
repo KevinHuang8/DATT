@@ -18,7 +18,7 @@ from DATT.quadsim.fflin import (
 )
 from DATT.quadsim.flatref import StaticRef, PosLineYawLine, YawLine, PosLine
 from DATT.quadsim.models import IdentityModel, rocky09
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 from DATT.quadsim.sim import QuadSim, QuadSimMotors
 
 from DATT.python_utils.mathu import normang, smoothang
@@ -169,7 +169,7 @@ if __name__ == "__main__":
   #endyaw = 0.0
   duration = 2.0
 
-  startstate = State(
+  startstate = State_struct(
     pos=startpos,
     vel=np.zeros(3),
     rot=R.from_euler('ZYX', [startyaw, 0.0, 0.0]),

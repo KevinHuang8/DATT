@@ -1,7 +1,8 @@
 import numpy as np
 from DATT.quadsim.flatref import StaticRef
+from DATT.refs.base_ref import BaseRef
 
-class CircleRef:
+class CircleRef(BaseRef):
     def __init__(self, rad, altitude, offset=(1,0), period=2*np.pi):
         self.radius = rad
         self.offset = offset

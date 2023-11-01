@@ -11,7 +11,7 @@ from DATT.quadsim.cascaded import CascadedController
 from DATT.quadsim.cascaded_angvel import CascadedControllerAngvel
 from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.models import IdentityModel
-from DATT.quadsim.rigid_body import State
+from DATT.quadsim.rigid_body import State_struct
 from DATT.quadsim.visualizer import Vis
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
@@ -43,7 +43,7 @@ if __name__ == "__main__":
   tss = []
   for ctrl, lab in ctrls:
     ctrl.ref = ref
-    quadsim.setstate(State())
+    quadsim.setstate(State_struct())
     ts = quadsim.simulate(dt=dt, t_end=t_end, controller=ctrl)
 
     tss.append((ts, lab))

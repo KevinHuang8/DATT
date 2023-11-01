@@ -1,8 +1,9 @@
 import numpy as np
 import random
 from DATT.python_utils import plotu, polyu
+from DATT.refs.base_ref import BaseRef
 
-class PolyRef:
+class PolyRef(BaseRef):
     def __init__(self, altitude, use_y=False, t_end=10.0, degree=3, seed=2023, env_diff_seed=False, fixed_seed=False):
         assert degree % 2 == 1
 

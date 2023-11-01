@@ -1,12 +1,11 @@
 import numpy as np
-
 from gym import spaces
+from scipy.spatial.transform import Rotation as R
 
 from DATT.learning.base_env import BaseQuadsimEnv
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.configuration.configuration import AllConfig
 from DATT.quadsim.lineref import LineRef
 
-from scipy.spatial.transform import Rotation as R
 
 class TrajectoryEnv(BaseQuadsimEnv):
   """
