@@ -6,7 +6,7 @@ datt_hover_config = DATTConfig()
 
 # Simple DATT w/ feedforward, without any adaptation
 datt_config = DATTConfig()
-datt_config.policy_name = 'datt_adaptive.zip'
+datt_config.policy_name = 'datt'
 datt_config.task = DroneTask.TRAJFBFF
 
 

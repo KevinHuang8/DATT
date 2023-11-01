@@ -44,7 +44,7 @@ class PIDConfig:
 
 class DATTConfig:
     task = DroneTask.HOVER
-    policy_name = "hover_04k"
+    policy_name = "datt_hover"
     # config_filename = "default_hover.py"
 
     adaptive = False 

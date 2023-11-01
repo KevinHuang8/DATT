@@ -36,7 +36,7 @@ Change directory and rc file as needed (e.g. if using zsh).
 
 ## Usage
 
-This repo contains the simulation code for training DATT. For running on the real Crazyflie, see our drone stack here: https://github.com/Rwik2000/crazyswarm_DATT
+This repo contains the simulation code for training DATT and running MPPI and PID. For running on the real Crazyflie, see our drone stack here: https://github.com/Rwik2000/crazyswarm_DATT
 
 ### Summary:
 
@@ -56,7 +56,7 @@ Training a policy requires specifying a *task* and a *configuration*. The task d
 
 ### Tasks
 
-See tasks in `./tasks/`. Each class is superclass of `BaseEnv`, which has the gym env API. In practice, the primary thing that should change between different drone tasks are the action space and reward function.
+See tasks in `.learning/tasks/`. Each class is superclass of `BaseEnv`, which has the gym env API. In practice, the primary thing that should change between different drone tasks are the action space and reward function.
 
 Standard trajectory tracking should have `trajectory_fbff` passed in.
 
@@ -89,3 +89,41 @@ Run `train_policy.py` from the command line. It takes the following arguments:
 Run `eval_policy.py` with the policy name, task, algorithm the policy was trained on, and the number of evaluation steps.
 
 This script currently just prints out the mean/std rewards over randomized episodes, and visualizes rollouts of the policy in sim.
+
+# Running the Simulator
+
+As stated in the paper we introduce our architecture DATT and compare it with PID and MPPI as baselines. 
+
+A sample sim run can look like : 
+
+```bash
+python3 main.py --cntrl <controller name> --cntrl_config <controller config preset> --env_config <env config file> --ref <ref>
+
+```
+
+- `cntrl` : name of controller i.e `pid` / `mppi` / `datt` [Default : `datt`]
+- `cntrl_config` : Default controller configurations are in `./controllers/cntrl_config.py`. In this field, you make a preset of the default configurations and add them to `./controllers/cntrl_config_presets.py`. You add the preset name from the preset file in this field.
+- `env_config` is the same as config during training
+- `ref` : reference trajectory to be tracked by the controller
+
+### PID
+```bash
+main.py --cntrl pid --cntrl_config pid_config --env_config datt.py --ref random_zigzag
+
+```
+
+### MPPI
+```bash
+python3 main.py --cntrl mppi --cntrl_config mppi_config --env_config datt.py --ref random_zigzag
+
+```
+
+## DATT
+
+We are providing pre-trained models for DATT for different tasks : 
+
+| Task                                 | Configuration file | Model |
+| -------------                        | -------------      |-----------------|
+| Hover                                | [datt_hover.py](configuration/datt_hover.py)     |[datt_hover](learning/saved_policies/datt_hover.zip)|
+| Trajectory tracking (No adaptation)  | [datt.py](configuration/datt.py) |       [datt](learning/saved_policies/datt.zip)|
+| Trajectory tracking with adaptation  | [datt_wind_adaptive.py](configuration/datt_wind_adaptive.py)       |[datt_wind_adaptive](learning/saved_policies/datt_wind_adaptive.zip)|
