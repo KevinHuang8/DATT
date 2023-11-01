@@ -10,7 +10,7 @@ from DATT.quadsim.control import Controller
 # from DATT.learning.configs_enum import *
 from DATT.learning.configs import *
 from DATT.learning.tasks import DroneTask
-from DATT.learning.refs import TrajectoryRef
+from DATT.refs import TrajectoryRef
 
 from DATT.quadsim.models import RBModel
 from DATT.quadsim.controllers.cntrl_config import DATTConfig

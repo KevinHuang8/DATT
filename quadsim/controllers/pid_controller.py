@@ -40,7 +40,7 @@ class PIDController(Controller):
    # Updating error for integral term.
     self.pos_err_int += p_err * dt
 
-    acc_des = (np.array([0, 0, self.config.sim_config.g]) 
+    acc_des = (np.array([0, 0, self.config.sim_config.g()]) 
               - self.pid_config.kp_pos * (p_err) 
               - self.pid_config.kd_pos * (v_err) 
               - self.pid_config.ki_pos * self.pos_err_int )

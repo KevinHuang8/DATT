@@ -11,7 +11,7 @@ from rich.progress import MofNCompleteColumn, TimeElapsedColumn
 
 from DATT.learning.configs import *
 from DATT.learning.tasks import DroneTask
-from DATT.learning.refs import TrajectoryRef
+from DATT.refs import TrajectoryRef
 
 from DATT.configuration.configuration import AllConfig
 from DATT.learning.utils.adaptation_network import AdaptationNetwork

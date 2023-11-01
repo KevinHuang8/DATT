@@ -21,7 +21,7 @@ from DATT.learning.utils.feedforward_feature_extractor import \
 
 from DATT.learning.configs import *
 from DATT.learning.tasks import DroneTask
-from DATT.learning.refs import TrajectoryRef
+from DATT.refs import TrajectoryRef
 
 def parse_args():
     parser = ArgumentParser()

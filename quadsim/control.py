@@ -1,7 +1,7 @@
 import numpy as np
 
 from DATT.quadsim.learn import AccelLearner
-from DATT.learning.refs.base_ref import BaseRef
+from DATT.refs.base_ref import BaseRef
 class Controller:
   def __init__(self, output_rpm=False):
     self.output_rpm = output_rpm

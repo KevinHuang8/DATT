@@ -7,13 +7,13 @@ from DATT.quadsim.sim import QuadSim
 # from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
 from DATT.quadsim.models import IdentityModel
 
-from DATT.learning.refs.pointed_star import NPointedStar
+from DATT.refs.pointed_star import NPointedStar
 # from DATT.learning.policy_controller import PolicyController
 
 # from DATT.learning.train_policy import DroneTask
 # from DATT.learning.configs_enum import *
 from DATT.learning.configs import *
-from DATT.learning.refs import TrajectoryRef
+from DATT.refs import TrajectoryRef
 
 
 from DATT.quadsim.controllers  import cntrl_config_presets, ControllersZoo
