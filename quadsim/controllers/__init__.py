@@ -1,25 +1,22 @@
-# from Controllers.hover_ppo_controller import *
-# from Controllers.bc_controller import BC_Controller
-# from Controllers.traj_ppo_controller import PPOController_trajectory
-# from Controllers.traj_ppo_controller_adapt import PPOController_trajectory_adaptive
-# from Controllers.traj_ppo_controller_ustruct import PPOController_trajectory_ustruct
-# from Controllers.traj_ppo_controller_adapt_L1 import PPOController_trajectory_L1_adaptive
+from enum import Enum
+from DATT.quadsim.controllers.pid_controller import PIDController
+from DATT.quadsim.controllers.mppi_controller import MPPIController
+from DATT.quadsim.controllers.datt_controller import DATTController
+from DATT.quadsim.controllers.cntrl_config import *
+class ControllersZoo(Enum):
+    PID = 'pid'
+    MPPI = 'mppi'
+    DATT = 'datt'
+    
+    def cntrl(self, model, cntrl_configs : dict):
+        pid_config = cntrl_configs.get('pid', PIDConfig())
+        mppi_config = cntrl_configs.get('mppi', MPPIConfig())
+        datt_config = cntrl_configs.get('datt', DATTConfig())
+        
 
-# from DATT.quadsim.controllers.pid_controller import PIDController
-# from DATT.quadsim.controllers.mppi_controller import MPPIController
-# from enum import Enum
+        return {
+            ControllersZoo.PID : PIDController(model, pid_config),
+            ControllersZoo.MPPI : MPPIController(model, mppi_config),
+            ControllersZoo.DATT : DATTController(model, datt_config)
 
-
-# from quadsim_vision.configuration import PIDConfig, MPPIConfig
-# class ControllersZoo(Enum):
-#     PID = 'pid'
-#     MPPI = 'mppi'
-
-#     def cntrl(self, env_config, drone_config, configs : dict):
-#         pid_config = configs.get('pid_config', PIDConfig())
-#         mppi_config = configs.get('mppi_config', MPPIConfig())
-
-#         return {
-#             ControllersZoo.PID : PIDController(env_config, drone_config, pid_config),
-#             ControllersZoo.MPPI : MPPIController(env_config, drone_config, mppi_config),
-#         }[ControllersZoo(self._value_)]
+        }[ControllersZoo(self._value_)]

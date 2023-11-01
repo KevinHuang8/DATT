@@ -26,9 +26,8 @@ from DATT.learning.configs import *
 from DATT.learning.tasks import DroneTask
 from DATT.learning.refs import TrajectoryRef
 
-from DATT.quadsim.controllers.pid_controller import PIDController
-from DATT.quadsim.controllers.mppi_controller import MPPIController
-from DATT.quadsim.controllers.datt_controller import DATTController
+
+from DATT.quadsim.controllers  import cntrl_config_presets, ControllersZoo
 
 
 
@@ -41,104 +40,85 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 if __name__ == "__main__":
-  import argparse
-  import time
+	import argparse
+	import time
 
-  parser = argparse.ArgumentParser()
-  parser.add_argument('--policyname', '-n', default='hover_basic', type=str, help='Policy name to load')
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--cntrl', default=ControllersZoo.DATT, type=ControllersZoo)
+	parser.add_argument('--cntrl_config', default='datt_hover_config', type=str)
 
-  args = parser.parse_args()
 
-  posdes = np.array((1.0, 1.0, 1.0))
-  # yawdes = np.pi / 2
-  yawdes = 0.0
-  dt = 0.02
-  vis = True
-  plot = True
+	args = parser.parse_args()
+	
+	posdes = np.array((1.0, 1.0, 1.0))
+	# yawdes = np.pi / 2
+	yawdes = 0.0
+	dt = 0.02
+	vis = True
+	plot = True
 
-  t_end = 25.0
+	t_end = 25.0
 
-  ref = NPointedStar(n_points=5, speed=2, radius=1)
-  # ref = main_loop(saved_traj='test_ref', parent=Path().absolute() / 'learning' / 'refs')
+	# Loading refs
+	ref = NPointedStar(n_points=5, speed=2, radius=1)
 
-  model = IdentityModel()
+	# Loading drone configs
+	model = IdentityModel()
+	
+	# Loading sim
+	quadsim = QuadSim(model, vis=vis)
 
-  quadsim = QuadSim(model, vis=vis)
-  #controller = CascadedController(model, rot_metric=rot_metrics.rotvec_tilt_priority2)
-  # controller = PolicyController(model, algoname='ppo', policyname=args.policyname)
-  # controller = CascadedController(model, rot_metric=rot_metrics.euler_zyx)
-  #controller = FBLinController(model, dt=dt)
+	# Loading controller
+	cntrl : ControllersZoo = args.cntrl
+	cntrl_config = getattr(cntrl_config_presets, args.cntrl_config, "Config not found")
+	controller = cntrl.cntrl(model, {cntrl._value_ : cntrl_config})
 
-  # cntrl_config = MPPIConfig()
-  # controller = MPPIController(model, cntrl_config=cntrl_config)
+	controller.ref_func = ref
+	dists = [
+	# ConstantForce(np.array([4, 4, 4]))
+	# WindField(pos=np.array((-1, 1.5, 0.0)), direction=np.array((1, 0, 0)), noisevar=25.0, vmax=1500.0, decay_long=1.8)
+	]
+	ts = quadsim.simulate(dt=dt, t_end=t_end, controller=controller, dists=dists)
 
-  # cntrl_config = PIDConfig()
-  # controller = PIDController(model, cntrl_config=cntrl_config)
+	if not plot:
+		sys.exit(0)
 
-  cntrl_config = DATTConfig()
+	eulers = np.array([rot.as_euler('ZYX')[::-1] for rot in ts.rot])
 
-  # cntrl_config.policy_name = 'traj_mixed2D_all_refs_diffaxis2_17500000_steps.zip'
-  # cntrl_config.task = DroneTask.TRAJFBFF
-  # cntrl_config.config_filename = 'trajectory_latency.py'
-  # cntrl_config.load_config()
+	plt.figure()
+	ax = plt.subplot(3, 1, 1)
+	plt.plot(ts.times, ts.pos[:, 0])
+	plt.plot(ts.times, ref.pos(ts.times)[0, :])
+	plt.subplot(3, 1, 2, sharex=ax)
+	plt.plot(ts.times, ts.pos[:, 1])
+	plt.plot(ts.times, ref.pos(ts.times)[1, :])
+	plt.subplot(3, 1, 3, sharex=ax)
+	plt.plot(ts.times, ts.pos[:, 2])
+	plt.plot(ts.times, ref.pos(ts.times)[2, :])
+	plt.suptitle(type(controller).__name__)
 
-  cntrl_config.policy_name = 'traj_mixed2D_wind_adaptive2_REAL'
-  cntrl_config.task = DroneTask.TRAJFBFF
-  cntrl_config.config_filename = 'trajectory_wind_adaptive.py'
-  cntrl_config.adaptive = True
-  cntrl_config.adaptation_type = 'l1'
-  cntrl_config.adaptive_policy_name = 'wind_adaptation_net_RMA'
-  cntrl_config.load_config()
+	plt.figure()
 
-  
-  controller = DATTController(model, cntrl_config=cntrl_config)
-  
-  controller.ref_func = ref
-  dists = [
-    # ConstantForce(np.array([4, 4, 4]))
-    # WindField(pos=np.array((-1, 1.5, 0.0)), direction=np.array((1, 0, 0)), noisevar=25.0, vmax=1500.0, decay_long=1.8)
-  ]
-  ts = quadsim.simulate(dt=dt, t_end=t_end, controller=controller, dists=dists)
+	plt.plot(ts.pos[:, 0], ts.pos[:, 1], label='actual')
+	# plt.plot(ref.pos(ts.times)[0, :], ref.pos(ts.times)[1, :], label='desired')
+	plt.legend()
 
-  if not plot:
-    sys.exit(0)
+	# subplot(ts.times, ts.pos, yname="Pos. (m)", title="Position", des=ref.pos(ts.times))
+	subplot(ts.times, ts.vel, yname="Vel. (m)", title="Velocity")
 
-  eulers = np.array([rot.as_euler('ZYX')[::-1] for rot in ts.rot])
+	subplot(ts.times, ref.vel(ts.times).T, yname="Vel. (m)", title="Velocity", label="Desired")
 
-  plt.figure()
-  ax = plt.subplot(3, 1, 1)
-  plt.plot(ts.times, ts.pos[:, 0])
-  plt.plot(ts.times, ref.pos(ts.times)[0, :])
-  plt.subplot(3, 1, 2, sharex=ax)
-  plt.plot(ts.times, ts.pos[:, 1])
-  plt.plot(ts.times, ref.pos(ts.times)[1, :])
-  plt.subplot(3, 1, 3, sharex=ax)
-  plt.plot(ts.times, ts.pos[:, 2])
-  plt.plot(ts.times, ref.pos(ts.times)[2, :])
-  plt.suptitle(type(controller).__name__)
+	subplot(ts.times, eulers, yname="Euler (rad)", title="ZYX Euler Angles")
+	subplot(ts.times, ts.ang, yname="$\\omega$ (rad/s)", title="Angular Velocity")
+	subplot(ts.times, ts.force, yname="Force (N)", title="Body Z Thrust")
 
-  plt.figure()
+	# fig = plt.figure(num="Trajectory")
+	# ax = fig.add_subplot(111, projection='3d')
+	# plt.plot(ts.pos[:, 0], ts.pos[:, 1], ts.pos[:, 2])
+	# plt.xlabel("X (m)")
+	# plt.ylabel("Y (m)")
+	# ax.set_zlabel("Z (m)")
+	# plt.title("Trajectory")
+	# set_3daxes_equal(ax)
 
-  plt.plot(ts.pos[:, 0], ts.pos[:, 1], label='actual')
-  # plt.plot(ref.pos(ts.times)[0, :], ref.pos(ts.times)[1, :], label='desired')
-  plt.legend()
-
-  # subplot(ts.times, ts.pos, yname="Pos. (m)", title="Position", des=ref.pos(ts.times))
-  subplot(ts.times, ts.vel, yname="Vel. (m)", title="Velocity")
-
-  subplot(ts.times, ref.vel(ts.times).T, yname="Vel. (m)", title="Velocity", label="Desired")
-
-  subplot(ts.times, eulers, yname="Euler (rad)", title="ZYX Euler Angles")
-  subplot(ts.times, ts.ang, yname="$\\omega$ (rad/s)", title="Angular Velocity")
-  subplot(ts.times, ts.force, yname="Force (N)", title="Body Z Thrust")
-
-  # fig = plt.figure(num="Trajectory")
-  # ax = fig.add_subplot(111, projection='3d')
-  # plt.plot(ts.pos[:, 0], ts.pos[:, 1], ts.pos[:, 2])
-  # plt.xlabel("X (m)")
-  # plt.ylabel("Y (m)")
-  # ax.set_zlabel("Z (m)")
-  # plt.title("Trajectory")
-  # set_3daxes_equal(ax)
-
-  plt.show()
+	plt.show()

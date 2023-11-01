@@ -56,30 +56,4 @@ class DATTConfig:
     def load_config(self, ):
         self.config = import_config(self.config_filename)
 
-    # ff = False
-    # time_horizon = 10
-    # fb = False
 
-
-    # e_dims = 0
-
-    # body_frame = False
-
-
-
-
-    # integration with learning pipeline
-    # drone_config = DroneConfiguration()
-    # wind_config = WindConfiguration()
-    # init_config = InitializationConfiguration()
-    # sim_config = SimConfiguration()
-    # adapt_config = AdaptationConfiguration()
-    # train_config = TrainingConfiguration(body_frame)
-    # policy_config = PolicyConfiguration(fb_term=fb)
-    # ref_config = RefConfiguration()
-    # config = AllConfig(drone_config, wind_config, init_config, sim_config, adapt_config, train_config, policy_config, ref_config)
-
-
-
-    # relative = False
-    # log_scale = False
