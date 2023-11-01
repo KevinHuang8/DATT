@@ -1,5 +1,5 @@
 from DATT.learning.tasks import DroneTask
-from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig, DATTConfig
+from DATT.controllers.cntrl_config import PIDConfig, MPPIConfig, DATTConfig
 
 # DATT hover
 datt_hover_config = DATTConfig()

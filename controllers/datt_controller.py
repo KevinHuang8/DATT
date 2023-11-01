@@ -13,7 +13,7 @@ from DATT.learning.tasks import DroneTask
 from DATT.refs import TrajectoryRef
 
 from DATT.quadsim.models import RBModel
-from DATT.quadsim.controllers.cntrl_config import DATTConfig
+from DATT.controllers.cntrl_config import DATTConfig
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 from DATT.configuration.configuration import AllConfig
 from DATT.learning.adaptation_module import Adapation

@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 from DATT.quadsim.control import Controller
 from DATT.quadsim.models import RBModel
-from DATT.quadsim.controllers.cntrl_config import PIDConfig
+from DATT.controllers.cntrl_config import PIDConfig
 from DATT.quadsim.rigid_body import State_struct
 from DATT.configuration.configuration import AllConfig
 

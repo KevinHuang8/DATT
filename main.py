@@ -8,7 +8,7 @@ from DATT.quadsim.models import IdentityModel
 from DATT.refs.pointed_star import NPointedStar
 from DATT.learning.configs import *
 
-from DATT.quadsim.controllers  import cntrl_config_presets, ControllersZoo
+from DATT.controllers  import cntrl_config_presets, ControllersZoo
 from DATT.configuration.configuration import AllConfig
 from DATT.refs import TrajectoryRef
 

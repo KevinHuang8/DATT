@@ -3,7 +3,7 @@ import torch
 from quadsim_vision.utils.math_utils import *
 
 
-from DATT.quadsim.controllers.cntrl_config import MPPIConfig
+from DATT.controllers.cntrl_config import MPPIConfig
 from DATT.refs.base_ref import BaseRef
 from DATT.quadsim.rigid_body import State_struct
 from quadsim_vision.utils.timer import Timer

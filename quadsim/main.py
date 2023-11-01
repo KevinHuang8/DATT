@@ -16,7 +16,7 @@ from DATT.learning.configs import *
 from DATT.refs import TrajectoryRef
 
 
-from DATT.quadsim.controllers  import cntrl_config_presets, ControllersZoo
+from DATT.controllers  import cntrl_config_presets, ControllersZoo
 from DATT.configuration.configuration import AllConfig
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal

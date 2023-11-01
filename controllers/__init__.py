@@ -1,8 +1,8 @@
 from enum import Enum
-from DATT.quadsim.controllers.pid_controller import PIDController
-from DATT.quadsim.controllers.mppi_controller import MPPIController
-from DATT.quadsim.controllers.datt_controller import DATTController
-from DATT.quadsim.controllers.cntrl_config import *
+from DATT.controllers.pid_controller import PIDController
+from DATT.controllers.mppi_controller import MPPIController
+from DATT.controllers.datt_controller import DATTController
+from DATT.controllers.cntrl_config import *
 class ControllersZoo(Enum):
     PID = 'pid'
     MPPI = 'mppi'
