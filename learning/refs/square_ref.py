@@ -1,5 +1,4 @@
 import numpy as np
-from DATT.quadsim.flatref import StaticRef
 from DATT.learning.refs.base_ref import BaseRef
 
 class SquareRef(BaseRef):

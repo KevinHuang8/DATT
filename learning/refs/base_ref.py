@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import matplotlib.pyplot as plt
 from quadsim_vision.utils.rigid_body import State_struct
 from scipy.spatial.transform import Rotation as R

@@ -1,3 +1,4 @@
+import numpy as np
 from enum import Enum
 from DATT.learning.configuration.configuration import AllConfig, RefConfiguration
 from DATT.learning.refs import (

@@ -1,12 +1,6 @@
 import numpy as np
 
-from gym import Env, spaces
-
-from DATT.quadsim.sim import QuadSim
-from DATT.quadsim.models import IdentityModel
-from DATT.quadsim.rigid_body import State_struct
 from DATT.learning.base_env import BaseQuadsimEnv
-from DATT.learning.configuration.configuration import AllConfig
 
 
 class HoverEnv(BaseQuadsimEnv):

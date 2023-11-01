@@ -23,7 +23,6 @@ from DATT.learning.base_env import BaseQuadsimEnv
 from DATT.learning.train_policy import TrajectoryRef
 
 from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.evaluation import evaluate_policy
 
 
 def parse_args():

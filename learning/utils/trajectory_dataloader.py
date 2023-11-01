@@ -1,6 +1,4 @@
 import torch
-import numpy as np
-
 
 class TrajectoryDataset(torch.utils.data.Dataset):
     def __init__(self, data, device, e_dim=3, time_horizon=100):

@@ -1,9 +1,7 @@
 import numpy as np
-
 from gym import spaces
 
 from DATT.learning.base_env import BaseQuadsimEnv
-from DATT.learning.configuration.configuration import AllConfig
 
 class YawflipEnv(BaseQuadsimEnv):
   """

@@ -1,6 +1,5 @@
 import torch
 
-
 class AdaptationNetwork(torch.nn.Module):
     def __init__(self, input_dims, e_dims, complex=True):
         super().__init__()

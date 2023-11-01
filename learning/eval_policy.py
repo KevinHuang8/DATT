@@ -12,14 +12,9 @@ from DATT.learning.refs import TrajectoryRef
 
 from DATT.quadsim.visualizer import Vis
 
-from DATT.quadsim.models import IdentityModel
-from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R
-from DATT.python_utils.plotu import set_3daxes_equal
 
-from DATT.learning.refs.gen_trajectory import Trajectory
 
-from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.vec_env.base_vec_env import VecEnv
 from DATT.learning.configuration.configuration import AllConfig
 
