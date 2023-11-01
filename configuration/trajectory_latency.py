@@ -1,22 +1,20 @@
 import numpy as np
 
-from DATT.learning.configuration.configuration import *
+from DATT.configuration.configuration import *
 
 drone_config = DroneConfiguration(
-    mass = ConfigValue[float](1.0, randomize=False),
-    I = ConfigValue[float](1.0, randomize=False),
-    g = ConfigValue[float](9.8, False)
+    mass = ConfigValue[float](1.0, randomize=False, min=0.4, max=1.6),
+    I = ConfigValue[float](1.0, randomize=False, min=0.9, max=1.1),
 )
 
 wind_config = WindConfiguration(
-    is_wind = True,
+    is_wind = False,
     dir = ConfigValue[np.ndarray](
         default=np.zeros(3), 
-        randomize=True,
-        min=np.array([-2, -2, -2]),
-        max=np.array([2, 2, 2])
+        randomize=False,
+        min=np.array([-1, -1, -1]),
+        max=np.array([1, 1, 1])
     ),
-    random_walk=True
 )
 
 init_config = InitializationConfiguration(
@@ -44,14 +42,15 @@ init_config = InitializationConfiguration(
 sim_config = SimConfiguration(
     linear_var=ConfigValue[float](default=0.0, randomize=False),
     angular_var=ConfigValue[float](default=0.0, randomize=False),
-    obs_noise=ConfigValue[float](default=0.005, randomize=False),
+    obs_noise=ConfigValue[float](default=0.020, randomize=False),
     latency=ConfigValue[int](default=0.0, randomize=False),
     k=ConfigValue[float](default=0.4, randomize=False),
-    L1_simulation=ConfigValue[float](default=True, randomize=False),
+    kw=ConfigValue[float](default=0.4, randomize=False),
+    kt=ConfigValue[float](default=0.6, randomize=False)
 )
 
 adapt_config = AdaptationConfiguration(
-    include = [EnvCondition.WIND]
+    include = []
 )
 
 train_config = TrainingConfiguration()

@@ -3,37 +3,23 @@ import sys
 import numpy as np
 
 from DATT.quadsim.sim import QuadSim
-from DATT.quadsim.cascaded import CascadedController
-from DATT.quadsim.fblin import FBLinController
-from DATT.quadsim.flatref import StaticRef, PosLine
 # from DATT.quadsim.pid_controller import PIDController
 # from DATT.learning.expert_pid_controller_trajectory import PIDController as PIDControllerTrajectory
-from DATT.quadsim.flatref import StaticRef, PosLine
 from DATT.quadsim.models import IdentityModel
-from DATT.quadsim.dist import WindField, ConstantForce
-from DATT.quadsim.circleref import CircleRef
-from DATT.quadsim.lineref import LineRef
-from DATT.learning.refs.square_ref import SquareRef
-from DATT.learning.refs.random_zigzag import RandomZigzag
+
 from DATT.learning.refs.pointed_star import NPointedStar
 # from DATT.learning.policy_controller import PolicyController
-from DATT.learning.refs.gen_trajectory import main_loop, Trajectory
-from DATT.quadsim.fig8ref import Fig8Ref
 
 # from DATT.learning.train_policy import DroneTask
 # from DATT.learning.configs_enum import *
 from DATT.learning.configs import *
-from DATT.learning.tasks import DroneTask
 from DATT.learning.refs import TrajectoryRef
 
 
 from DATT.quadsim.controllers  import cntrl_config_presets, ControllersZoo
-
-
+from DATT.configuration.configuration import AllConfig
 
 from DATT.python_utils.plotu import subplot, set_3daxes_equal
-from DATT.quadsim.controllers.cntrl_config import PIDConfig, MPPIConfig, DATTConfig
-import DATT.quadsim.rot_metrics as rot_metrics
 
 
 import matplotlib.pyplot as plt
@@ -44,12 +30,18 @@ if __name__ == "__main__":
 	import time
 
 	parser = argparse.ArgumentParser()
+	parser.add_argument('--cntrl_config', default='datt_hover_config', type=str, 
+					 help='Pick or Make a config preset from DATT/quadsim/controllers/cntrl_config_presets')
 	parser.add_argument('--cntrl', default=ControllersZoo.DATT, type=ControllersZoo)
-	parser.add_argument('--cntrl_config', default='datt_hover_config', type=str)
+	parser.add_argument('--env_config', default='default_hover.py')
+	
 
 
 	args = parser.parse_args()
+
+	config : AllConfig = import_config(args.env_config)
 	
+
 	posdes = np.array((1.0, 1.0, 1.0))
 	# yawdes = np.pi / 2
 	yawdes = 0.0
@@ -71,9 +63,12 @@ if __name__ == "__main__":
 	# Loading controller
 	cntrl : ControllersZoo = args.cntrl
 	cntrl_config = getattr(cntrl_config_presets, args.cntrl_config, "Config not found")
-	controller = cntrl.cntrl(model, {cntrl._value_ : cntrl_config})
-
+	controller = cntrl.cntrl(config, {cntrl._value_ : cntrl_config})
 	controller.ref_func = ref
+
+
+
+
 	dists = [
 	# ConstantForce(np.array([4, 4, 4]))
 	# WindField(pos=np.array((-1, 1.5, 0.0)), direction=np.array((1, 0, 0)), noisevar=25.0, vmax=1500.0, decay_long=1.8)

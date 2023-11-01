@@ -1,6 +1,6 @@
 import numpy as np
 # from DATT.learning.train_policy import DroneTask
-from DATT.learning.configuration.configuration import *
+from DATT.configuration.configuration import *
 # from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
 from DATT.learning.configs import *
 from DATT.learning.tasks import DroneTask
@@ -45,15 +45,15 @@ class PIDConfig:
 class DATTConfig:
     task = DroneTask.HOVER
     policy_name = "hover_04k"
-    config_filename = "default_hover.py"
+    # config_filename = "default_hover.py"
 
     adaptive = False 
     adaptation_type = None # l1/naive/rma
     adaptive_policy_name = None # policy name if rma
 
-    config : AllConfig = import_config(config_filename)
+    # config : AllConfig = import_config(config_filename)
 
-    def load_config(self, ):
-        self.config = import_config(self.config_filename)
+    # def load_config(self, ):
+    #     self.config = import_config(self.config_filename)
 
 

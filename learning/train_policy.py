@@ -7,7 +7,6 @@ from pathlib import Path
 
 import torch
 import numpy as np
-from stable_baselines3 import A2C, DDPG, PPO, TD3, SAC
 from stable_baselines3.common.base_class import BaseAlgorithm
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.env_util import make_vec_env
@@ -15,8 +14,7 @@ from stable_baselines3.common.torch_layers import FlattenExtractor
 from stable_baselines3.common.vec_env import VecEnv, VecMonitor
 from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
 
-from DATT.learning.base_env import BaseQuadsimEnv
-from DATT.learning.configuration.configuration import AllConfig, RefConfiguration
+from DATT.configuration.configuration import AllConfig, RefConfiguration
 
 from DATT.learning.utils.feedforward_feature_extractor import \
     FeedforwardFeaturesExtractor

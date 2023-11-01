@@ -28,6 +28,17 @@ class ConfigValue(Generic[T]):
     def __post_init__(self):
         if self.randomize and (self.min is None or self.max is None):
             raise ValueError(f'Must specify a min and a max when randomizing a param.') 
+    
+        
+    def get_value(self) -> T:
+        if not self.randomize:
+            return self.default
+        if isinstance(self.default, np.ndarray):
+            return np.random.uniform(self.min, self.max, self.default.shape)
+        return np.random.uniform(self.min, self.max)
+    
+    def __call__(self) -> T:
+        return self.get_value()
 
 
 class Sampler:
@@ -54,7 +65,6 @@ class DroneConfiguration:
     mass: ConfigValue[float] = ConfigValue[float](default=1.0, randomize=False)
     # assumes all axes are same
     I: ConfigValue[float] = ConfigValue[float](default=1.0, randomize=False)
-    g: ConfigValue[float] = ConfigValue[float](default=9.8, randomize=False)
 
     sampler: Sampler = Sampler()
 
@@ -103,6 +113,9 @@ class SimConfiguration:
     k: ConfigValue[float] = ConfigValue[float](default=1, randomize=False)
     kw: ConfigValue[float] = ConfigValue[float](default=0.4, randomize=False)
     kt: ConfigValue[float] = ConfigValue[float](default=0.6, randomize=False)
+    dt : ConfigValue[float] = ConfigValue[float](default=0.02, randomize=False)
+    g: ConfigValue[float] = ConfigValue[float](default=9.8, randomize=False)
+
 
     # Whether to use a second order delay model for the ang vel controller. If false, a first
     # order model is used

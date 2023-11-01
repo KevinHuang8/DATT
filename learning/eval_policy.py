@@ -16,7 +16,7 @@ from scipy.spatial.transform import Rotation as R
 
 
 from stable_baselines3.common.vec_env.base_vec_env import VecEnv
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.configuration.configuration import AllConfig
 
 from learning.adaptation_module import Adapation
 

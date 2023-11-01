@@ -25,7 +25,7 @@ class RLAlgo(Enum):
 thisdir = os.path.dirname(os.path.realpath(__file__))
 DEFAULT_LOG_DIR = Path(thisdir) / 'logs'
 DEFAULT_DATA_DIR = Path(thisdir) / 'data'
-CONFIG_DIR = Path(thisdir) / 'configuration'
+CONFIG_DIR = Path(thisdir) / '../configuration'
 CONFIG_DIR.mkdir(exist_ok=True)
 SAVED_POLICY_DIR = Path(thisdir) / 'saved_policies'
 SAVED_POLICY_DIR.mkdir(exist_ok=True)

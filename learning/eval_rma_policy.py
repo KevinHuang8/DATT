@@ -17,7 +17,7 @@ from DATT.learning.refs import TrajectoryRef
 from DATT.quadsim.visualizer import Vis
 from DATT.python_utils.plotu import subplot
 from scipy.spatial.transform import Rotation as R
-from DATT.learning.configuration.configuration import AllConfig
+from DATT.configuration.configuration import AllConfig
 from DATT.learning.utils.adaptation_network import AdaptationNetwork
 from DATT.learning.base_env import BaseQuadsimEnv
 from DATT.learning.train_policy import TrajectoryRef

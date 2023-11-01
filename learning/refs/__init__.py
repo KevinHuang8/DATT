@@ -1,6 +1,8 @@
 import numpy as np
+from pathlib import Path
 from enum import Enum
-from DATT.learning.configuration.configuration import AllConfig, RefConfiguration
+
+from DATT.configuration.configuration import AllConfig, RefConfiguration
 from DATT.learning.refs import (
         lineref, square_ref, circle_ref, random_zigzag, setpoint_ref, polynomial_ref, random_zigzag_yaw,
         chained_poly_ref, mixed_trajectory_ref, gen_trajectory, pointed_star, closed_polygon)

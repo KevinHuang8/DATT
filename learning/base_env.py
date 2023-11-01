@@ -11,8 +11,8 @@ from DATT.quadsim.sim import QuadSim
 from DATT.quadsim.models import IdentityModel, RBModel
 from DATT.quadsim.rigid_body import State_struct
 from DATT.quadsim.dist import WindField, ConstantForce
-from DATT.learning.configuration.configuration import AllConfig
-from DATT.learning.configuration.configuration import EnvCondition
+from DATT.configuration.configuration import AllConfig
+from DATT.configuration.configuration import EnvCondition
 
 from DATT.learning.adaptation_module import Adapation
 
@@ -88,7 +88,7 @@ class BaseQuadsimEnv(Env):
         
         self.reset()
 
-        self.dt = 0.02
+        self.dt = self.config.sim_config.dt()
 
         extra_dims = 0
         all_mins = np.array([])
@@ -138,12 +138,13 @@ class BaseQuadsimEnv(Env):
             self.save_info(new_episode=True)
 
         drone_config = self.config.drone_config
+        sim_config = self.config.sim_config
         self.model = RBModel(
             mass=drone_config.sampler.sample_param(drone_config.mass), 
             I=np.eye(3)*drone_config.sampler.sample_param(drone_config.I), 
-            g=drone_config.sampler.sample_param(drone_config.g)
+            g=drone_config.sampler.sample_param(sim_config.g)
         )
-        self.g = drone_config.sampler.sample_param(drone_config.g)
+        self.g = drone_config.sampler.sample_param(sim_config.g)
         self.quadsim = QuadSim(self.model, vis=False)
 
         self.t = 0.0 

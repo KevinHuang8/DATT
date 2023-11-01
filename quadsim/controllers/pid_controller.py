@@ -4,12 +4,14 @@ from DATT.quadsim.control import Controller
 from DATT.quadsim.models import RBModel
 from DATT.quadsim.controllers.cntrl_config import PIDConfig
 from DATT.quadsim.rigid_body import State_struct
+from DATT.configuration.configuration import AllConfig
+
 
 class PIDController(Controller):
-  def __init__(self, model : RBModel, cntrl_config : PIDConfig):
+  def __init__(self, config : AllConfig, cntrl_config : PIDConfig):
     super().__init__()
     self.pid_config = cntrl_config
-    self.model = model
+    self.config = config
 
     self.pos_err_int = np.zeros(3)
     self.v_prev = np.zeros(3)
@@ -38,7 +40,7 @@ class PIDController(Controller):
    # Updating error for integral term.
     self.pos_err_int += p_err * dt
 
-    acc_des = (np.array([0, 0, self.model.g]) 
+    acc_des = (np.array([0, 0, self.config.sim_config.g]) 
               - self.pid_config.kp_pos * (p_err) 
               - self.pid_config.kd_pos * (v_err) 
               - self.pid_config.ki_pos * self.pos_err_int )

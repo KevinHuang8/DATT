@@ -8,15 +8,15 @@ class ControllersZoo(Enum):
     MPPI = 'mppi'
     DATT = 'datt'
     
-    def cntrl(self, model, cntrl_configs : dict):
+    def cntrl(self, config, cntrl_configs : dict):
         pid_config = cntrl_configs.get('pid', PIDConfig())
         mppi_config = cntrl_configs.get('mppi', MPPIConfig())
         datt_config = cntrl_configs.get('datt', DATTConfig())
         
 
         return {
-            ControllersZoo.PID : PIDController(model, pid_config),
-            ControllersZoo.MPPI : MPPIController(model, mppi_config),
-            ControllersZoo.DATT : DATTController(model, datt_config)
+            ControllersZoo.PID : PIDController(config, pid_config),
+            ControllersZoo.MPPI : MPPIController(config, mppi_config),
+            ControllersZoo.DATT : DATTController(config, datt_config)
 
         }[ControllersZoo(self._value_)]
