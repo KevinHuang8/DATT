@@ -26,7 +26,7 @@ if __name__ == "__main__":
     parser.add_argument('--cntrl_config', default='datt_hover_config', type=str, 
                         help='Pick or Make a config preset from DATT/quadsim/controllers/cntrl_config_presets')
     parser.add_argument('--cntrl', default=ControllersZoo.DATT, type=ControllersZoo)
-    parser.add_argument('--env_config', default='default_hover.py')
+    parser.add_argument('--env_config', default='datt_hover.py')
     parser.add_argument('-r', '--ref', dest='ref', type=TrajectoryRef, default=TrajectoryRef.LINE_REF)
     parser.add_argument('--seed', type=int, default=0)
 

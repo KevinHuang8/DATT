@@ -1,12 +1,12 @@
 import numpy as np
 import torch
-from quadsim_vision.utils.math_utils import *
+from DATT.utils.math_utils import *
 
 
 from DATT.controllers.cntrl_config import MPPIConfig
 from DATT.refs.base_ref import BaseRef
 from DATT.quadsim.rigid_body import State_struct
-from quadsim_vision.utils.timer import Timer
+from DATT.utils.timer import Timer
 from DATT.quadsim.control import Controller
 
 from DATT.quadsim.models import RBModel
