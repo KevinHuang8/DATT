@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from quadsim_vision.utils.rigid_body import State_struct
+from DATT.quadsim.rigid_body import State_struct
 from scipy.spatial.transform import Rotation as R
 
 class BaseRef():
