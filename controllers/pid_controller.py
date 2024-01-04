@@ -25,10 +25,12 @@ class PIDController(Controller):
 
     ref_state = self.ref_func.get_state_struct(t)
 
+    # print('offset : ', self.ref_func.offset_pos)
+
     if self.prev_t != None:
       dt = t - self.prev_t
     else:
-      dt = 0 #RECTIFY
+      dt = self.config.sim_config.dt()
 
     # PID
     pos = state.pos

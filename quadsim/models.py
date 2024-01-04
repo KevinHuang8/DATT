@@ -18,6 +18,10 @@ class IdentityModel(RBModel):
   def __init__(self):
     super().__init__(1, np.eye(3), general_params()['g'])
 
+class crazyflieModel(RBModel):
+  def __init__(self):
+    super().__init__(0.040, np.array([16.571710e-6, 16.655602e-6, 29.261652e-6]), general_params()['g'])
+
 class QuadModel(RBModel):
   def __init__(self, params):
     assert type(params) is dict

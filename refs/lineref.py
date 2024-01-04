@@ -3,7 +3,9 @@ from DATT.quadsim.flatref import StaticRef
 from DATT.refs.base_ref import BaseRef
 
 class LineRef(BaseRef):
-    def __init__(self, D, altitude, period=4):
+    def __init__(self, D, altitude, period=4, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.D = D
         self.altitude = altitude
         self.T = period

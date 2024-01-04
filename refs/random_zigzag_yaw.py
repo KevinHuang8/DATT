@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from DATT.refs.base_ref import BaseRef
 
 class RandomZigzagYaw(BaseRef):
-    def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.9, max_dt=1.5, seed=2023, fixed_seed=False):
+    def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.9, max_dt=1.5, seed=2023, fixed_seed=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.max_D = max_D
         self.min_dt = min_dt
         self.max_dt = max_dt

@@ -4,6 +4,10 @@ from DATT.quadsim.rigid_body import State_struct
 from scipy.spatial.transform import Rotation as R
 
 class BaseRef():
+    def __init__(self, offset_pos=np.zeros(3)):
+        self.curr_pose = State_struct()
+        self.offset_pos = offset_pos
+
     def ref_vec(self, t):
         pos = self.pos(t)
         vel = self.vel(t)
@@ -29,11 +33,16 @@ class BaseRef():
         )
         
     def pos(self, t):
+        
+        _offset_pos = self.offset_pos
+        if isinstance(t, np.ndarray):
+            _offset_pos = _offset_pos[:, None]
+
         return np.array([
             t*0,
             t*0,
             t*0
-        ])
+        ]) + _offset_pos
     
     def vel(self, t):
         return np.array([

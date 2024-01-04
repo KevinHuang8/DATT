@@ -10,7 +10,9 @@ import numpy as np
 import random
 
 class MixedTrajectoryRef(BaseRef):
-    def __init__(self, altitude, ymax=0.0, zmax=0.0, diff_axis=False, include_all=False, seed=2023, env_diff_seed=False, init_ref=None, fixed_seed=False):
+    def __init__(self, altitude, ymax=0.0, zmax=0.0, diff_axis=False, include_all=False, seed=2023, env_diff_seed=False, init_ref=None, fixed_seed=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.poly_ref = PolyRef(altitude=altitude, use_y=ymax > 0.0, seed=seed, fixed_seed=fixed_seed)
         # print('DIFF AXIS', diff_axis)
         self.zigzag_ref = RandomZigzag(max_D=[1.0, ymax, zmax], diff_axis=diff_axis, seed=seed, fixed_seed=fixed_seed)

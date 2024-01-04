@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from DATT.refs.base_ref import BaseRef
 
 class RandomZigzag(BaseRef):
-    def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.6, max_dt=1.5, diff_axis=False, seed=2023, env_diff_seed=False, fixed_seed=False):
+    def __init__(self, max_D=np.array([1, 0, 0]), min_dt=0.6, max_dt=1.5, diff_axis=False, seed=2023, env_diff_seed=False, fixed_seed=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.max_D = max_D
         self.min_dt = min_dt
         self.max_dt = max_dt
@@ -15,7 +17,11 @@ class RandomZigzag(BaseRef):
         # print('seed', seed)
         self.seed = seed
         self.fixed_seed = fixed_seed
-        np.random.seed(self.seed)
+        try:
+            np.random.seed(self.seed)
+        except:
+            np.random.seed(self.seed())
+
         self.reset()
 
     def reset(self):
@@ -94,7 +100,11 @@ class RandomZigzag(BaseRef):
 
         x = left + (right - left) / (t_right - t_left) * (t - t_left)
 
-        return x
+        _offset_pos = self.offset_pos
+        if isinstance(t, np.ndarray):
+            _offset_pos = _offset_pos[:, None]
+
+        return x + _offset_pos
     
     def vel(self, t):
         if self.diff_axis:

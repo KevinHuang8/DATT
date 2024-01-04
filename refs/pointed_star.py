@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from DATT.refs.base_ref import BaseRef
 
 class NPointedStar(BaseRef):
-    def __init__(self, n_points=5, speed=3, radius=1, random=False, seed=2023, env_diff_seed=False, fixed_seed=False):
+    def __init__(self, n_points=5, speed=3, radius=1, random=False, seed=2023, env_diff_seed=False, fixed_seed=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.n_points = n_points
         self.speed = speed
         self.radius = radius

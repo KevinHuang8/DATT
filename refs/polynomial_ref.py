@@ -4,7 +4,9 @@ from DATT.python_utils import plotu, polyu
 from DATT.refs.base_ref import BaseRef
 
 class PolyRef(BaseRef):
-    def __init__(self, altitude, use_y=False, t_end=10.0, degree=3, seed=2023, env_diff_seed=False, fixed_seed=False):
+    def __init__(self, altitude, use_y=False, t_end=10.0, degree=3, seed=2023, env_diff_seed=False, fixed_seed=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         assert degree % 2 == 1
 
         self.altitude = altitude

@@ -2,7 +2,9 @@ import numpy as np
 from DATT.refs.base_ref import BaseRef
 
 class SquareRef(BaseRef):
-    def __init__(self, altitude, D1, D2, T1, T2):
+    def __init__(self, altitude, D1, D2, T1, T2, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.altitude = altitude
         self.D1 = D1
         self.D2 = D2

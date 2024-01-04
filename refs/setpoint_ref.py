@@ -2,7 +2,9 @@ import numpy as np
 from DATT.refs.base_ref import BaseRef
 
 class SetpointRef(BaseRef):
-    def __init__(self, setpoint=(0, 0, 0), randomize=False):
+    def __init__(self, setpoint=(0, 0, 0), randomize=False, **kwargs):
+        offset_pos = kwargs.get('offset_pos', np.zeros(3))
+        super().__init__(offset_pos)
         self.randomize = randomize
         self.default = setpoint
         self.reset()
