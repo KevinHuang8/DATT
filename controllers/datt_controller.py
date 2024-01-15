@@ -9,8 +9,6 @@ from DATT.quadsim.control import Controller
 # from DATT.learning.train_policy import DroneTask, RLAlgo, SAVED_POLICY_DIR, import_config, CONFIG_DIR
 # from DATT.learning.configs_enum import *
 from DATT.learning.configs import *
-from DATT.learning.tasks import DroneTask
-from DATT.refs import TrajectoryRef
 
 from DATT.quadsim.models import RBModel
 from DATT.controllers.cntrl_config import DATTConfig
@@ -56,8 +54,10 @@ class DATTController(Controller):
 
 		self.history = np.zeros((1, 14, 5))
 		self.history_rma = np.zeros((1, 14, 50))
+
+		self.start_pos = np.zeros(3)
     
-	def response(self, fl = 1, **response_inputs):
+	def response(self, **response_inputs):
 		t = response_inputs.get('t')
 		state = response_inputs.get('state')
 		# ref_func = response_inputs.get('ref_func')
@@ -65,13 +65,10 @@ class DATTController(Controller):
 		if self.prev_t is None:
 			dt = 0.02
 		else:
-			dt = t - self.prev_t
-
-		if fl:
-			self.prev_t = t
+			dt = self.config.sim_config.dt()
 
 		# States
-		pos = state.pos
+		pos = state.pos - self.start_pos
 		vel = state.vel
 		rot = state.rot
 

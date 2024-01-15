@@ -16,6 +16,8 @@ class PIDController(Controller):
     self.pos_err_int = np.zeros(3)
     self.v_prev = np.zeros(3)
     self.prev_t = None
+    self.start_pos = np.zeros(3)
+
 
   def response(self, **response_inputs ):
     
@@ -33,7 +35,7 @@ class PIDController(Controller):
       dt = self.config.sim_config.dt()
 
     # PID
-    pos = state.pos
+    pos = state.pos - self.start_pos
     vel = state.vel
     rot = state.rot
     p_err = pos - ref_state.pos

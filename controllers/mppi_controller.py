@@ -42,7 +42,7 @@ class MPPIController(Controller):
 		self.runL1 = True
 
 		self.prev_t = 0
-
+		self.start_pos = np.zeros(3)
 
 	def response(self, **response_inputs):
 		t = response_inputs.get('t')
@@ -51,7 +51,7 @@ class MPPIController(Controller):
 
 		ref_func_obj = self.ref_func
 
-		pos = state.pos
+		pos = state.pos - self.start_pos
 		vel = state.vel
 		rot = state.rot
 		quat = rot.as_quat()

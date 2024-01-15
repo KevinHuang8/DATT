@@ -39,22 +39,17 @@ if __name__ == "__main__":
 
     config : AllConfig = import_config(args.env_config)
 
-
-    posdes = np.array((1.0, 1.0, 1.0))
-    # yawdes = np.pi / 2
-    yawdes = 0.0
-    dt = 0.02
+    dt = config.sim_config.dt()
     vis = True
     plot = True
 
-    t_end = 25.0
+    t_end = 10.0
 
     # Loading refs
     seed = args.seed
     ref = args.ref.ref(config.ref_config, 
                        seed=seed, 
                        env_diff_seed=config.training_config.env_diff_seed)
-    # ref = NPointedStar(n_points=5, speed=2, radius=1)
 
     # Loading drone configs
     model = IdentityModel()
