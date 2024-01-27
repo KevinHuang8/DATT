@@ -182,7 +182,7 @@ class BaseQuadsimEnv(Env):
 
         obs = self.obs(state)
 
-        if self.L1_simulation.default:
+        if self.L1_simulation:
             self.prev_thrust_cmd = 0.0
             self.adaptation_module = Adapation()
             # hack, only valid when d is only env param

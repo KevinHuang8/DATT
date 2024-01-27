@@ -108,7 +108,7 @@ class QuadSim:
       self.bodyz_force_des = bodyz_force_des
       self.angvel_des = angvel_des
 
-      self.curr_bodyz_force = self.curr_bodyz_force + 0.4 * (self.bodyz_force_des - self.curr_bodyz_force)
+      self.curr_bodyz_force = self.curr_bodyz_force + k * (self.bodyz_force_des - self.curr_bodyz_force)
 
       if second_order:
         self.torque_des = kw * (self.angvel_des - self.curr_angvel) 

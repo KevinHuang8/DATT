@@ -18,7 +18,7 @@ from scipy.spatial.transform import Rotation as R
 from stable_baselines3.common.vec_env.base_vec_env import VecEnv
 from DATT.configuration.configuration import AllConfig
 
-from learning.adaptation_module import Adapation
+from DATT.learning.adaptation_module import Adapation
 
 
 def parse_args():
@@ -120,7 +120,7 @@ def eval():
                 action, _states = policy.predict(obs, deterministic=True)
 
                 act = action
-                obs, rewards, dones, info = evalenv.step(act, return_motor_info=True)
+                obs, rewards, dones, info = evalenv.step(act)
 
                 state = evalenv.getstate()
 
@@ -133,9 +133,9 @@ def eval():
                 all_states.append(np.r_[state.pos, state.vel, obs[6:10]])
                 # all_pid_actions.append(pid_action[0])
                 # all_bc_actions.append(bc_action)
-                if not isinstance(evalenv, VecEnv):
-                  all_ang_vel_actual.append(info['motor'][3])
-                  all_ang_vel_desired.append(info['motor'][1])
+                # if not isinstance(evalenv, VecEnv):
+                #   all_ang_vel_actual.append(info['motor'][3])
+                #   all_ang_vel_desired.append(info['motor'][1])
 
                 try:
                     des_traj.append(evalenv.ref.pos(evalenv.t))

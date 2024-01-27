@@ -9,7 +9,7 @@ drone_config = DroneConfiguration(
 )
 
 wind_config = WindConfiguration(
-    is_wind = True,
+    is_wind = False,
     dir = ConfigValue[np.ndarray](
         default=np.zeros(3), 
         randomize=True,
@@ -23,8 +23,8 @@ init_config = InitializationConfiguration(
     pos = ConfigValue[np.ndarray](
         default=np.array([0.0, 0.0, 0.0]), 
         randomize=False,
-        min=np.array([-0, -0, -0]),
-        max=np.array([0, 0, 0])
+        min=np.array([-0.5, -0.5, -0.5]),
+        max=np.array([0.5, 0.5, 0.5])
     ),
     vel = ConfigValue[np.ndarray](
         default=np.array([0.0, 0.0, 0.0]), 
@@ -47,11 +47,10 @@ sim_config = SimConfiguration(
     obs_noise=ConfigValue[float](default=0.005, randomize=False),
     latency=ConfigValue[int](default=0.0, randomize=False),
     k=ConfigValue[float](default=0.4, randomize=False),
-    L1_simulation=ConfigValue[float](default=True, randomize=False),
+    L1_simulation=ConfigValue[float](default=False, randomize=False),
 )
 
 adapt_config = AdaptationConfiguration(
-    include = [EnvCondition.WIND]
 )
 
 train_config = TrainingConfiguration()
@@ -59,7 +58,8 @@ train_config = TrainingConfiguration()
 policy_config = PolicyConfiguration()
 
 ref_config = RefConfiguration(
-    init_ref = 1
+    init_ref = 1,
+    seed=0
 )
 
 config = AllConfig(drone_config, wind_config, init_config, sim_config, adapt_config, train_config, policy_config, ref_config)
