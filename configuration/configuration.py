@@ -123,7 +123,7 @@ class SimConfiguration:
 
     # Whether to run L1 adaptation in sim, so the d values are not ground truth but the results
     # of L1 adaptation. NOTE: Requires wind to be specified in AdaptationConfiguration, and first
-    L1_simulation: ConfigValue[bool] = ConfigValue[bool](default=False, randomize=False)
+    L1_simulation: bool = False
 
     sampler: Sampler = Sampler()
 
