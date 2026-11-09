@@ -183,9 +183,9 @@ def eval():
 
     action_dims = 4
     if os.path.exists(SAVED_POLICY_DIR / f'{policy_name}_adapt' / f'{adapt_name}'):
-        adaptation_network_state_dict = torch.load(SAVED_POLICY_DIR / f'{policy_name}_adapt' / f'{adapt_name}', map_location=torch.device('cpu'))
+        adaptation_network_state_dict = torch.load(SAVED_POLICY_DIR / f'{policy_name}_adapt' / f'{adapt_name}', map_location=torch.device('cpu'), weights_only=True)
     elif os.path.exists(SAVED_POLICY_DIR / f'{adapt_name}'):
-        adaptation_network_state_dict = torch.load(SAVED_POLICY_DIR / f'{adapt_name}', map_location=torch.device('cpu'))
+        adaptation_network_state_dict = torch.load(SAVED_POLICY_DIR / f'{adapt_name}', map_location=torch.device('cpu'), weights_only=True)
     else:
         raise ValueError(f'Invalid adaptation network name: {adapt_name}')
 
